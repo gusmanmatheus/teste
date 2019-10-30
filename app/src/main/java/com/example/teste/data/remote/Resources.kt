@@ -9,11 +9,11 @@ class Resources<T> private constructor(
 ) {
 
     companion object {
-        fun <T> succes(data: T?): Resources<T>? {
+        fun <T> successReponse(data: T?): Resources<T>? {
             return Resources(StatusRequest.SUCCES, data)
         }
 
-        fun  <T>error(error: String?): Resources<T> {
+        fun  <T>errorResponse(error: String?): Resources<T> {
             return Resources(StatusRequest.ERROR, error = error )
         }
 

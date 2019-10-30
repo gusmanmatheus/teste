@@ -30,7 +30,7 @@ class ContactsActivity : AppCompatActivity() {
         contactsViewModel.resp()
 
         contactsViewModel.sendPayment.observe(this, Observer {
-            when(it.status){
+            when (it.status) {
                 Resources.StatusRequest.SUCCES -> {
                     Log.i("xrl8", "viewszSEND" + it.data)
                 }

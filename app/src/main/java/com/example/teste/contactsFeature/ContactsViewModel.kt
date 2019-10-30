@@ -1,7 +1,5 @@
 package com.example.teste.contactsFeature
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.teste.data.Repository
 import com.example.teste.data.model.Payment

@@ -4,7 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ServiceProvider {
-    val retrofit: Retrofit = Retrofit
+    private val retrofit: Retrofit = Retrofit
         .Builder()
         .baseUrl("http://careers.picpay.com/tests/mobdev/")
         .addConverterFactory(GsonConverterFactory.create())
