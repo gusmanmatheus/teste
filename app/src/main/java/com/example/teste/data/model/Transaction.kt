@@ -13,7 +13,7 @@ data class Transaction(
     val value: Double,
     @SerializedName("destination_user")
     val destinationUser: User,
-    @SerializedName("success")
+    @SerializedName("successReponse")
     val success: Boolean,
     @SerializedName("timestamp")
     val timestamp: String,
