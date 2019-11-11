@@ -9,12 +9,12 @@ import retrofit2.Response
 
 fun <T> Call<T>.enqueueLiveResource(callback: LiveResources<T>) {
     this.enqueue(object : Callback<T> {
-        override fun onFailure(call: Call<T>, t: Throwable) {
-            callback.value = errorResponse("ERROR")
+        override fun onFailure(call: Call<T>, t: Throwable?) {
+            callback.postValue(errorResponse(t?.message))
         }
 
-        override fun onResponse(call: Call<T>, response: Response<T>) {
-            callback.value = successReponse(response.body())
+        override fun onResponse(call: Call<T>, response: Response<T>?) {
+            callback.postValue(successReponse(response?.body()))
         }
 
     })

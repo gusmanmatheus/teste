@@ -9,9 +9,9 @@ import com.example.teste.modules.enqueueLiveResource
 import retrofit2.Call
 
 
-class RemoteDataSource() {
+class RemoteDataSource {
     fun requestListUser(list: LiveResources<List<User>>) {
-        list.value = loading()
+        list.postValue(loading())
         val call: Call<List<User>> = request.requestUsers()
         call.enqueueLiveResource(list)
     }
