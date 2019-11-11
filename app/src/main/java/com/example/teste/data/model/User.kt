@@ -8,6 +8,6 @@ data class User(
     @SerializedName("name")
     val name: String,
     @SerializedName("img")
-    val imagem: String,
+    val image: String,
     @SerializedName("username")
     val username: String)
