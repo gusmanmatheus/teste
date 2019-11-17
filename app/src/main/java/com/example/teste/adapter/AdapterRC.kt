@@ -13,21 +13,8 @@ class AdapterRC : RecyclerView.Adapter<AdapterRC.ViewHolder>(), Filterable {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val charString = constraint.toString()
-                listFilted = if (charString.isEmpty()) {
-                    data
-                } else {
-                    val listFilter = mutableListOf<User>()
-                    data.forEach {
-                        if (it.name.toLowerCase().contains(charString.toLowerCase()) ||
-                            it.username.toLowerCase().contains(charString.toLowerCase())
-                        ) {
-                            listFilter.add(it)
-                        }
-                    }
-                    listFilter
-                }
                 val filterResult = FilterResults()
-                filterResult.values = listFilted
+                filterResult.values = filterUser(charString)
                 return filterResult
             }
 
@@ -74,5 +61,24 @@ class AdapterRC : RecyclerView.Adapter<AdapterRC.ViewHolder>(), Filterable {
         fun bind(user: User) {
             binding.user = user
         }
+    }
+
+    fun filterUser(constraint: CharSequence?):MutableList<User>{
+        val charString = constraint.toString()
+        listFilted = if (charString.isEmpty()) {
+            data
+        } else {
+            val listFilter = mutableListOf<User>()
+            data.forEach {
+                if (it.name.toLowerCase().contains(charString.toLowerCase()) ||
+                    it.username.toLowerCase().contains(charString.toLowerCase())
+                ) {
+                    listFilter.add(it)
+                }
+            }
+            listFilter
+        }
+
+        return listFilted
     }
 }

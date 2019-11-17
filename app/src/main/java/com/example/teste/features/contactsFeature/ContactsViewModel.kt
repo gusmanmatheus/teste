@@ -1,4 +1,4 @@
-package com.example.teste.contactsFeature
+package com.example.teste.features.contactsFeature
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,7 +8,7 @@ import com.example.teste.data.remote.LiveResources
 
 class ContactsViewModel( val repository: Repository) : ViewModel() {
     val listUser = LiveResources<List<User>>()
-    var loading =  true
+    val loading:MutableLiveData<Boolean> = MutableLiveData()
 
     fun requestUsers() {
         repository.getUser(listUser)

@@ -1,4 +1,4 @@
-package com.example.teste.contactsFeature
+package com.example.teste.features.contactsFeature
 
 import android.graphics.PorterDuff
 import android.os.Bundle
@@ -28,11 +28,10 @@ class ContactsActivity : AppCompatActivity() {
             R.layout.activity_contacts
         )
     }
-    private val adapter = AdapterRC()
+    private val adapter:AdapterRC by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_contacts)
         setBinding()
         setAdapter()
         setClickAdapter()
@@ -66,17 +65,17 @@ class ContactsActivity : AppCompatActivity() {
         contactsViewModel.listUser.observe(this, Observer {
             when (it.status) {
                 Resources.StatusRequest.SUCCES -> {
-                    contactsViewModel.loading = false
+                    contactsViewModel.loading.value = false
                     it.data?.let { list ->
                         adapter.setValues(list.toMutableList())
                         adapter.notifyDataSetChanged()
                     }
                 }
                 Resources.StatusRequest.ERROR -> {
-                    contactsViewModel.loading = false
+                    contactsViewModel.loading.value = false
                 }
                 Resources.StatusRequest.LOADING -> {
-                    contactsViewModel.loading = true
+                    contactsViewModel.loading.value = true
                 }
             }
         })
