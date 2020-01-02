@@ -7,6 +7,7 @@ import com.example.teste.features.contactsFeature.ContactsViewModel
 import com.example.teste.data.Repository
 import com.example.teste.data.remote.RemoteDataSource
 import com.example.teste.databinding.ActivityContactsBinding
+import com.example.teste.features.registerCard.RegisterCardViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
@@ -32,6 +33,9 @@ val contactsModule = module {
     factory {
         AdapterRC()
     }
-}
 
+}
+val registerCardModulo =  module {
+    viewModel { RegisterCardViewModel() }
+}
 

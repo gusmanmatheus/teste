@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="margin_small24">24dp</dimen>
+    <dimen name="margin_medium24">24dp</dimen>
     <dimen name="margin_small16">16dp</dimen>
     <dimen name="mini_small8">8dp</dimen>
 
     <dimen name="margin_mini24">24dp</dimen>
 
     //I need check if i use sp
-    <dimen name="text_small24">24sp</dimen>
+    <dimen name="text_small16">16sp</dimen>
+    <dimen name="text_medium24">24sp</dimen>
+    <dimen name="text_big32">32sp</dimen>
     <dimen name="text_big42">42sp</dimen>
 </resources>

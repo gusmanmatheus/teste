@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+
+        <variable
+            name="viewModel"
+            type="com.example.teste.features.registerCard.RegisterCardViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blackBackGround"
+        tools:context=".feature.registerCard.RegisterActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium24"
+            android:layout_marginBottom="@dimen/margin_medium24"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/registerText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_medium24"
+                    android:layout_marginLeft="@dimen/margin_medium24"
+                    android:text="@string/registerCard"
+                    android:textColor="@color/whinte"
+                    android:textSize="@dimen/text_big32" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/numberCardTl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small16"
+                    android:textColorHint="@color/grayText"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/numberCardEd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/numberCardHint"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:text="@={viewModel.card.numberCard}"
+                        android:textColor="@color/grayText"
+
+                        android:textSize="@dimen/text_small16" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/holderNameTl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small16"
+                    android:textColorHint="@color/grayText"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/holderNameEd"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/margin_medium24"
+                        android:hint="@string/holderNameHint"
+                        android:maxLines="1"
+                        android:text="@={viewModel.card.holderName}"
+                        android:textColor="@color/grayText"
+                        android:textSize="@dimen/text_small16" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:id="@+id/a7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small16"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/expirationDateTl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                     android:inputType="number"
+                    android:textColorHint="@color/grayText"
+                        app:errorEnabled="true"
+
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/expirationDateEd"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="@string/expirationDateHint"
+                            android:maxLines="1"
+                            android:text="@={viewModel.card.expirationDate}"
+                            android:textColor="@color/grayText"
+                            android:textColorHint="@color/colorPrimary"
+                            android:textSize="@dimen/text_small16" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/cvvCardTl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="number"
+                        android:textColorHint="@color/grayText"
+                        app:errorEnabled="true"
+
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/cvvCardEd"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="@string/cvvHint"
+                            android:inputType="numberDecimal"
+                            android:maxLength="3"
+                            android:maxLines="1"
+                            android:text="@={viewModel.card.cvvCard}"
+                            android:textColor="@color/grayText"
+                            android:textColorHint="@color/colorPrimary"
+                            android:textSize="@dimen/text_small16" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/RegisterCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/margin_small16"
+                android:background="@drawable/standard_button"
+                android:text="Salvar"
+                android:textColor="@color/whinte"
+                android:visibility="visible"
+                tools:visibility="visible" />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

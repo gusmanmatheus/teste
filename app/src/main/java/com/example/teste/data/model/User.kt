@@ -1,6 +1,7 @@
 package com.example.teste.data.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class User(
     @SerializedName("id")
@@ -10,4 +11,4 @@ data class User(
     @SerializedName("img")
     val image: String,
     @SerializedName("username")
-    val username: String)
+    val username: String):Serializable

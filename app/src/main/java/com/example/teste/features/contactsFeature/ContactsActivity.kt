@@ -1,7 +1,9 @@
 package com.example.teste.features.contactsFeature
 
+import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
@@ -15,6 +17,7 @@ import com.example.teste.R
 import com.example.teste.adapter.AdapterRC
 import com.example.teste.data.remote.Resources
 import com.example.teste.databinding.ActivityContactsBinding
+import com.example.teste.features.primingCard.CardPriming
 import kotlinx.android.synthetic.main.activity_contacts.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -34,7 +37,7 @@ class ContactsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setBinding()
         setAdapter()
-        setClickAdapter()
+        clickAdapter()
         setObservables()
         focusController()
         changeColorText()
@@ -55,9 +58,12 @@ class ContactsActivity : AppCompatActivity() {
         requestListObservable()
         filterSearchView()
     }
-    fun setClickAdapter(){
+    private fun clickAdapter(){
         adapter.onItemClick = {
-            Toast.makeText(this,it.name,Toast.LENGTH_LONG).show()
+//            Toast.makeText(this,it.name,Toast.LENGTH_LONG).show()
+            val intent = Intent(this,CardPriming::class.java)
+            intent.putExtra(resources.getString(R.string.UserPayment),it)
+            startActivity(intent)
         }
     }
 
