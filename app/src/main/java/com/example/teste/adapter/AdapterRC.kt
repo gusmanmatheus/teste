@@ -58,12 +58,13 @@ class AdapterRC : RecyclerView.Adapter<AdapterRC.ViewHolder>(), Filterable {
                 }
             }
         }
+
         fun bind(user: User) {
             binding.user = user
         }
     }
 
-    fun filterUser(constraint: CharSequence?):MutableList<User>{
+    fun filterUser(constraint: CharSequence?): MutableList<User> {
         val charString = constraint.toString()
         listFilted = if (charString.isEmpty()) {
             data

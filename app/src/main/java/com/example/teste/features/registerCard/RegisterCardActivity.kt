@@ -1,7 +1,5 @@
 package com.example.teste.features.registerCard
 
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
@@ -14,10 +12,6 @@ import com.example.teste.modules.changeText
 import com.example.teste.modules.verifyFieldHasVoids
 import kotlinx.android.synthetic.main.activity_register_card.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import org.koin.android.ext.android.bind
 
 
 class RegisterCardActivity : AppCompatActivity() {

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teste.R
@@ -25,16 +26,12 @@ import org.koin.core.parameter.parametersOf
 
 class ContactsActivity : AppCompatActivity() {
     private val contactsViewModel: ContactsViewModel by viewModel()
-    private val binding: ActivityContactsBinding by inject {
-        parametersOf(
-            this,
-            R.layout.activity_contacts
-        )
-    }
-    private val adapter:AdapterRC by inject()
+    private lateinit var binding: ActivityContactsBinding
+    private val adapter: AdapterRC by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_contacts)
         setBinding()
         setAdapter()
         clickAdapter()
@@ -58,11 +55,12 @@ class ContactsActivity : AppCompatActivity() {
         requestListObservable()
         filterSearchView()
     }
-    private fun clickAdapter(){
+
+    private fun clickAdapter() {
         adapter.onItemClick = {
-//            Toast.makeText(this,it.name,Toast.LENGTH_LONG).show()
-            val intent = Intent(this,CardPriming::class.java)
-            intent.putExtra(resources.getString(R.string.UserPayment),it)
+            //            Toast.makeText(this,it.name,Toast.LENGTH_LONG).show()
+            val intent = Intent(this, CardPriming::class.java)
+            intent.putExtra(resources.getString(R.string.UserPayment), it)
             startActivity(intent)
         }
     }
@@ -141,7 +139,7 @@ class ContactsActivity : AppCompatActivity() {
     }
 
     private fun changeColorText() {
-        val color = ContextCompat.getColor(this,R.color.grayText)
+        val color = ContextCompat.getColor(this, R.color.grayText)
         val textColorSearchView: EditText =
             searchView.findViewById(androidx.appcompat.R.id.search_src_text)
         textColorSearchView.setTextColor(color)

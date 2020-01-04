@@ -15,10 +15,11 @@ class CardPriming : AppCompatActivity() {
         setContentView(R.layout.activity_card_priming)
         recoveryData()
     }
-    private fun recoveryData(){
-        val user  = intent.getSerializableExtra(resources.getString(R.string.UserPayment)) as User
-        Toast.makeText(this,user.name,Toast.LENGTH_SHORT).show()
-        val intent = Intent(this,RegisterCardActivity::class.java)
+
+    private fun recoveryData() {
+        val user = intent.getSerializableExtra(resources.getString(R.string.UserPayment)) as User
+        Toast.makeText(this, user.name, Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, RegisterCardActivity::class.java)
         startActivity(intent)
     }
 }

@@ -6,15 +6,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.teste.data.model.CreditCard
 import com.example.teste.modules.containsNumber
+import org.junit.Rule
 
 class RegisterCardViewModel : ViewModel() {
-    private val _card  =  MutableLiveData<CreditCard>()
+
+    private val _card = MutableLiveData<CreditCard>()
     val card: LiveData<CreditCard> = _card
 
 
     init {
-         _card.value = CreditCard("","","","")
+        _card.postValue(CreditCard("", "", "", ""))
     }
+
     fun verifyNumeberCharacterCvv(cvv: String) = cvv.length == 3
 
     fun verifyValidateDate(date: String): Boolean {
@@ -48,7 +51,7 @@ class RegisterCardViewModel : ViewModel() {
         }
     }
 
-    fun     saveCard() {
+    fun saveCard() {
         verifyCredCardValide()
     }
 //    fun insertCardInDB(card: CreditCard): Boolean {

@@ -24,6 +24,4 @@ object BindingAdapters {
     fun setBindLoading(view: View, isVisible: Boolean) {
         view.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
-
-
 }

@@ -4,7 +4,8 @@ import java.io.Serializable
 
 
 data class CreditCard(
-    var numberCard:String,
-    var holderName:String,
+    var numberCard: String,
+    var holderName: String,
     var expirationDate: String,
-    var cvvCard: String):Serializable
+    var cvvCard: String
+) : Serializable

@@ -11,4 +11,5 @@ data class User(
     @SerializedName("img")
     val image: String,
     @SerializedName("username")
-    val username: String):Serializable
+    val username: String
+) : Serializable
