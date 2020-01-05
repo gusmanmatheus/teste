@@ -15,7 +15,8 @@
         android:theme="@style/AppNoTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".features.paymentFeature.PaymentActivity"></activity>
-        <activity android:name=".features.registerCard.RegisterCardActivity" />
+        <activity android:name=".features.registerCard.RegisterCardActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".features.primingCard.CardPriming" />
         <activity android:name=".features.contactsFeature.ContactsActivity">
             <intent-filter>

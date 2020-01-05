@@ -6,12 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.teste.data.model.CreditCard
 import com.example.teste.modules.containsNumber
-import org.junit.Rule
 
 class RegisterCardViewModel : ViewModel() {
 
-    private val _card = MutableLiveData<CreditCard>()
-    val card: LiveData<CreditCard> = _card
+    private var _card = MutableLiveData<CreditCard>()
+    var card: LiveData<CreditCard> = _card
 
 
     init {
@@ -24,12 +23,12 @@ class RegisterCardViewModel : ViewModel() {
         val dates = date.split("/")
         if (dates.size >= 2) {
             return dates[0].toInt() in 1..12
-                    && dates[1].toInt() in 1..31
+                    && dates[1].toInt() > 20
         }
         return false
     }
 
-    fun verifyNumeberCharacterNumberCard(numberCard: String) = numberCard.length == 14
+    fun verifyNumeberCharacterNumberCard(numberCard: String) = numberCard.length == 16
 
     fun verifyNameContainsNumber(name: String): Boolean {
         return !name.containsNumber()
