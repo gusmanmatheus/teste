@@ -15,7 +15,7 @@ class RegisterCardViewModelTest {
 
     @Test
     fun `test numberCard size expectancy True`() {
-        val verify = viewModel.verifyNumeberCharacterNumberCard("01234567890000")//14
+        val verify = viewModel.verifyNumeberCharacterNumberCard("0123456789000000")//16
         assertTrue(verify)
     }
 
@@ -27,7 +27,7 @@ class RegisterCardViewModelTest {
 
     @Test
     fun `test numberCard size with more character expectancy False`() {
-        val verify = viewModel.verifyNumeberCharacterNumberCard("0123456789000000")//15
+        val verify = viewModel.verifyNumeberCharacterNumberCard("012345678900000000")//17
         assertFalse(verify)
 
     }
