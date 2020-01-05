@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.teste.contactsFeature.ContactsViewModel" />
+            type="com.example.teste.features.contactsFeature.ContactsViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".contactsFeature.ContactsActivity"
+        tools:context="com.example.teste.features.contactsFeature.ContactsActivity"
         android:background="@color/blackBackGround">
 
         <com.google.android.material.appbar.AppBarLayout

@@ -3,4 +3,15 @@
 
     <string name="contatosText">Contatos</string>
     <string name="hintSearchUser">A quem você deseja pagar?</string>
+    <string name="registerACardText"><b>Cadastre um cartão\nde crédito</b></string>
+    <string name="explanationRegisterACardText">para fazer pagamentos para outras\npessoas você
+        precisa cadastrar um\ncartão de cédito pessoal.</string>
+    <string name="registerCard">Cadastrar cartão</string>
+    <string name="UserPayment">UserPayment</string>
+
+    <string name="cvvHint">CVV</string>
+    <string name="numberCardHint">Número do cartão</string>
+    <string name="holderNameHint">Nome titular</string>
+    <string name="expirationDateHint">Vencimento</string>
+
 </resources>
