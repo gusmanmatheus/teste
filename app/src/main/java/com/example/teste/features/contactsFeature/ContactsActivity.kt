@@ -1,7 +1,9 @@
-package com.example.teste.contactsFeature
+package com.example.teste.features.contactsFeature
 
+import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
@@ -9,12 +11,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teste.R
 import com.example.teste.adapter.AdapterRC
 import com.example.teste.data.remote.Resources
 import com.example.teste.databinding.ActivityContactsBinding
+import com.example.teste.features.primingCard.CardPriming
 import kotlinx.android.synthetic.main.activity_contacts.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -22,20 +26,15 @@ import org.koin.core.parameter.parametersOf
 
 class ContactsActivity : AppCompatActivity() {
     private val contactsViewModel: ContactsViewModel by viewModel()
-    private val binding: ActivityContactsBinding by inject {
-        parametersOf(
-            this,
-            R.layout.activity_contacts
-        )
-    }
-    private val adapter = AdapterRC()
+    private lateinit var binding: ActivityContactsBinding
+    private val adapter: AdapterRC by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_contacts)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_contacts)
         setBinding()
         setAdapter()
-        setClickAdapter()
+        clickAdapter()
         setObservables()
         focusController()
         changeColorText()
@@ -56,9 +55,13 @@ class ContactsActivity : AppCompatActivity() {
         requestListObservable()
         filterSearchView()
     }
-    fun setClickAdapter(){
+
+    private fun clickAdapter() {
         adapter.onItemClick = {
-            Toast.makeText(this,it.name,Toast.LENGTH_LONG).show()
+            //            Toast.makeText(this,it.name,Toast.LENGTH_LONG).show()
+            val intent = Intent(this, CardPriming::class.java)
+            intent.putExtra(resources.getString(R.string.UserPayment), it)
+            startActivity(intent)
         }
     }
 
@@ -66,17 +69,17 @@ class ContactsActivity : AppCompatActivity() {
         contactsViewModel.listUser.observe(this, Observer {
             when (it.status) {
                 Resources.StatusRequest.SUCCES -> {
-                    contactsViewModel.loading = false
+                    contactsViewModel.loading.value = false
                     it.data?.let { list ->
                         adapter.setValues(list.toMutableList())
                         adapter.notifyDataSetChanged()
                     }
                 }
                 Resources.StatusRequest.ERROR -> {
-                    contactsViewModel.loading = false
+                    contactsViewModel.loading.value = false
                 }
                 Resources.StatusRequest.LOADING -> {
-                    contactsViewModel.loading = true
+                    contactsViewModel.loading.value = true
                 }
             }
         })
@@ -136,7 +139,7 @@ class ContactsActivity : AppCompatActivity() {
     }
 
     private fun changeColorText() {
-        val color = ContextCompat.getColor(this,R.color.grayText)
+        val color = ContextCompat.getColor(this, R.color.grayText)
         val textColorSearchView: EditText =
             searchView.findViewById(androidx.appcompat.R.id.search_src_text)
         textColorSearchView.setTextColor(color)
