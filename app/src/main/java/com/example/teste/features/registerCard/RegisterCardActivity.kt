@@ -1,5 +1,6 @@
 package com.example.teste.features.registerCard
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
@@ -8,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import com.example.teste.R
 import com.example.teste.databinding.ActivityRegisterCardBinding
+import com.example.teste.features.paymentFeature.PaymentActivity
 import com.example.teste.modules.Utils
 import com.example.teste.modules.changeText
 import com.example.teste.modules.verifyFieldHasVoids
@@ -53,7 +55,7 @@ class RegisterCardActivity : AppCompatActivity() {
     }
 
     private fun controlVisibilityButton() {
-        RegisterCard.isVisible = !EditText(this).verifyFieldHasVoids(
+        paymentButton.isVisible = !EditText(this).verifyFieldHasVoids(
             holderNameEd,
             numberCardEd,
             cvvCardEd,
@@ -134,10 +136,10 @@ class RegisterCardActivity : AppCompatActivity() {
 
 
     private fun clickRegisterCard() {
-        RegisterCard.setOnClickListener {
+        paymentButton.setOnClickListener {
             this.registerViewModel.saveCard()
             verifyCredCardValide()
-
+        startActivity(Intent(this,PaymentActivity::class.java))
         }
     }
 }

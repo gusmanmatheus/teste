@@ -1,9 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".features.paymentFeature.PaymentActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.teste.features.paymentFeature.PaymentViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blackBackGround"
+        tools:context=".features.paymentFeature.PaymentActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarPayment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/userPhoto"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarPayment"
+            tools:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/nickNameUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userPhoto"
+            tools:text="\@zelda.williams" />
+
+
+        <EditText
+            android:id="@+id/valuePayment"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:inputType="numberDecimal"
+            android:maxLines="1"
+            android:text="@={viewModel._valuePayment}"
+            tools:text="0,00"
+            android:textColor="@color/grayText"
+            android:textSize="@dimen/text_big42"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nickNameUser" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_small16"
+            android:layout_marginRight="@dimen/margin_small16"
+            android:text="R$"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_small16"
+            app:layout_constraintBottom_toBottomOf="@+id/valuePayment"
+            app:layout_constraintEnd_toStartOf="@+id/valuePayment"
+            app:layout_constraintTop_toTopOf="@+id/valuePayment" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_medium24"
+            android:layout_marginRight="@dimen/margin_medium24"
+            android:text="MasterCard"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/editCard"
+            app:layout_constraintEnd_toStartOf="@+id/editCard"
+            app:layout_constraintTop_toTopOf="@+id/editCard" />
+
+        <Button
+            android:id="@+id/editCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium24"
+            android:layout_marginEnd="@dimen/margin_medium24"
+            android:layout_marginRight="@dimen/margin_medium24"
+            android:background="@color/transparentColor"
+            android:text="Editar"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView3"
+            app:layout_constraintTop_toBottomOf="@+id/valuePayment" />
+
+        <Button
+            android:id="@+id/paymentButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin_small16"
+            android:layout_marginBottom="@dimen/margin_small16"
+            android:background="@drawable/standard_button"
+            android:text="Pagar"
+            android:textColor="@color/white"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:visibility="visible" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

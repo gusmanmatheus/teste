@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.teste.R
 import com.example.teste.data.model.User
+import com.example.teste.features.paymentFeature.PaymentActivity
 import com.example.teste.features.registerCard.RegisterCardActivity
 
 class CardPriming : AppCompatActivity() {
@@ -19,7 +20,7 @@ class CardPriming : AppCompatActivity() {
     private fun recoveryData() {
         val user = intent.getSerializableExtra(resources.getString(R.string.UserPayment)) as User
         Toast.makeText(this, user.name, Toast.LENGTH_SHORT).show()
-        val intent = Intent(this, RegisterCardActivity::class.java)
+        val intent = Intent(this, PaymentActivity::class.java)
         startActivity(intent)
     }
 }

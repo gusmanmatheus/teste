@@ -28,7 +28,7 @@
             android:layout_marginStart="@dimen/margin_medium24"
             android:layout_marginLeft="@dimen/margin_medium24"
             android:text="@string/registerCard"
-            android:textColor="@color/whinte"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_big32"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -146,7 +146,7 @@
 
 
         <Button
-            android:id="@+id/RegisterCard"
+            android:id="@+id/paymentButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Salvar"
@@ -155,7 +155,7 @@
             android:layout_margin="@dimen/margin_small16"
             android:layout_marginBottom="@dimen/margin_small16"
             android:background="@drawable/standard_button"
-            android:textColor="@color/whinte"
+            android:textColor="@color/white"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

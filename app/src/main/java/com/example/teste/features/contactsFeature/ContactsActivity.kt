@@ -3,10 +3,8 @@ package com.example.teste.features.contactsFeature
 import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.content.ContextCompat
@@ -22,7 +20,6 @@ import com.example.teste.features.primingCard.CardPriming
 import kotlinx.android.synthetic.main.activity_contacts.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 
 class ContactsActivity : AppCompatActivity() {
     private val contactsViewModel: ContactsViewModel by viewModel()
@@ -121,11 +118,11 @@ class ContactsActivity : AppCompatActivity() {
                 ContextCompat.getDrawable(baseContext, R.drawable.ic_launcher_background)
 
             searchIcon.setColorFilter(
-                ResourcesCompat.getColor(resources, R.color.whinte, null),
+                ResourcesCompat.getColor(resources, R.color.white, null),
                 PorterDuff.Mode.SRC_ATOP
             )
             searchIconX.setColorFilter(
-                ResourcesCompat.getColor(resources, R.color.whinte, null),
+                ResourcesCompat.getColor(resources, R.color.white, null),
                 PorterDuff.Mode.SRC_ATOP
             )
             searchView.background =

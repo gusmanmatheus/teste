@@ -1,5 +1,8 @@
 package com.example.teste.modules
 
+import java.math.BigDecimal
+import java.text.NumberFormat
+
 
 object Utils {
     fun maskDate(date: String?): String {
@@ -31,4 +34,15 @@ object Utils {
         }
         return ""
     }
+    fun maskValue(value: String?):String{
+        value?.let{
+
+            val cleanString = it
+            val parsed = BigDecimal(cleanString).setScale(2, BigDecimal.ROUND_FLOOR)
+                .divide(BigDecimal(100), BigDecimal.ROUND_FLOOR)
+            return NumberFormat.getCurrencyInstance().format(parsed).replace("\$","")
+//            editText.setSelection(formatted.length)
+             }
+        return ""
+}
 }
