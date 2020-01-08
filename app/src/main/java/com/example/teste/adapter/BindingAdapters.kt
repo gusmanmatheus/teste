@@ -3,6 +3,7 @@ package com.example.teste.adapter
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -34,6 +35,7 @@ object BindingAdapters {
     fun maskData(editText: EditText,text:String) {
        editText.setText(maskDate(text))
     }
+
 
 
 }

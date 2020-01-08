@@ -16,34 +16,40 @@ import org.koin.android.ext.android.inject
 
 class PaymentActivity : AppCompatActivity() {
     private val paymentViewModel by inject<PaymentViewModel>()
+    private var maskPayControl = false
     private lateinit var binding: ActivityPaymentBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_payment)
-        binding.viewModel = this.paymentViewModel
+        binding.lifecycleOwner = this
+         binding.viewModel = this.paymentViewModel
         setObservables()
     }
 
-    fun setObservables() {
+    private fun setObservables() {
         observableValue()
-//        observablePoint()
+        observablePoint()
     }
 
     private fun observableValue() {
         paymentViewModel.valuePayment.observe(this, Observer {
             if (it > "") {
-                val value = it.toDouble()
+                val value = it.replace(",",".").toDouble()
                 changeColorTextValuePayment(value > 0.0)
             }
         })
     }
 
-//    private fun observablePoint() {
-//        valuePayment.changeText {
-//            paymentViewModel._valuePayment.value = Utils.maskValue(valuePayment.text.toString())
-//            valuePayment.setSelection( paymentViewModel.valuePayment.value?.length?:0)
-//        }
-//    }
+    private fun observablePoint() {
+        valuePayment.changeText {
+            if (maskPayControl) {
+                maskPayControl = false
+                 Utils.maskValue(binding.valuePayment)
+            } else {
+                maskPayControl = true
+            }
+        }
+    }
 
     private fun changeColorTextValuePayment(condition: Boolean) {
         if (condition) {

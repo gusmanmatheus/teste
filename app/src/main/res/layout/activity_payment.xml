@@ -48,12 +48,12 @@
 
         <EditText
             android:id="@+id/valuePayment"
-            android:layout_width="100dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:inputType="numberDecimal"
             android:maxLines="1"
-            android:text="@={viewModel._valuePayment}"
+            android:text="@{viewModel._valuePayment}"
             tools:text="0,00"
             android:textColor="@color/grayText"
             android:textSize="@dimen/text_big42"
