@@ -14,8 +14,10 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teste.R
 import com.example.teste.adapter.AdapterRC
+import com.example.teste.data.model.User
 import com.example.teste.data.remote.Resources
 import com.example.teste.databinding.ActivityContactsBinding
+import com.example.teste.features.paymentFeature.PaymentActivity
 import com.example.teste.features.primingCard.CardPrimingActivity
 import kotlinx.android.synthetic.main.activity_contacts.*
 import org.koin.android.ext.android.inject
@@ -54,9 +56,18 @@ class ContactsActivity : AppCompatActivity() {
 
     private fun clickAdapter() {
         adapter.onItemClick = {
-            //            Toast.makeText(this,it.name,Toast.LENGTH_LONG).show()
+            nextActivity(it)
+        }
+    }
+
+    private fun nextActivity(user: User) {
+        if (contactsViewModel.verifyHasCard()) {
+            val intent = Intent(this, PaymentActivity::class.java)
+            intent.putExtra(resources.getString(R.string.UserPayment), user)
+            startActivity(intent)
+        } else {
             val intent = Intent(this, CardPrimingActivity::class.java)
-            intent.putExtra(resources.getString(R.string.UserPayment), it)
+            intent.putExtra(resources.getString(R.string.UserPayment), user)
             startActivity(intent)
         }
     }

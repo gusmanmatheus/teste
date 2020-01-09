@@ -1,16 +1,16 @@
 package com.example.teste.features.paymentFeature
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.teste.R
-import com.example.teste.data.model.CreditCard
 import com.example.teste.data.model.User
 import com.example.teste.databinding.ActivityPaymentBinding
+import com.example.teste.features.registerCard.RegisterCardActivity
 import com.example.teste.modules.Utils
 import com.example.teste.modules.changeText
 import kotlinx.android.synthetic.main.activity_payment.*
@@ -29,6 +29,7 @@ class PaymentActivity : AppCompatActivity() {
         recoveryData()
         showNumberCard()
         setObservables()
+        setClicks()
     }
 
     private fun setObservables() {
@@ -85,7 +86,6 @@ class PaymentActivity : AppCompatActivity() {
         ballValue += " " + paymentViewModel.creditCard.value?.numberCard?.substring(0, 3)
         masterCard.text = ballValue
     }
-
     private fun recoveryData() {
         recoveryCreditCard()
         recoveryUser()
@@ -97,10 +97,20 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun recoveryCreditCard() {
-        val creditCard =
-            intent.getSerializableExtra(resources.getString(R.string.cardPayment)) as CreditCard
-        paymentViewModel.setCreditCard(creditCard)
+          paymentViewModel.setupCreditCard()
     }
+
+    private fun setClicks(){
+        editCardClick()
+    }
+    private fun editCardClick(){
+        editCard.setOnClickListener {
+            val intent = Intent(this,RegisterCardActivity::class.java)
+            intent.putExtra(resources.getString(R.string.UserPayment),paymentViewModel.user.value)
+             startActivity(intent)
+        }
+    }
+    private fun paymentClick(){}
 
     private fun setToolbar() {
         setSupportActionBar(toolbarPayment)

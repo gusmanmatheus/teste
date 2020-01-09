@@ -27,8 +27,8 @@ class RegisterCardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_register_card)
-        binding.lifecycleOwner = this
         binding.viewModel = this.registerViewModel
+        binding.lifecycleOwner = this
         recoveryUser()
         setToolbar()
         controlVisibilityButton()
@@ -71,7 +71,7 @@ class RegisterCardActivity : AppCompatActivity() {
     }
 
 
-    private fun verifyCredCardValide() {
+    private fun verifyCredCardValide(): Boolean {
         val approvedCvv =
             registerViewModel.verifyNumeberCharacterCvv(registerViewModel.card.value?.cvvCard ?: "")
         val approvedName = registerViewModel.verifyNameContainsNumber(
@@ -109,12 +109,8 @@ class RegisterCardActivity : AppCompatActivity() {
             binding.expirationDateTl.isErrorEnabled = false
         }
 
-        if (approvedCvv && approvedName
-            && approvedNumber && approvedDate
-        ) {
-            Log.i("xrl8", "passou")
-            registerViewModel.saveCard()
-        }
+        return (approvedCvv && approvedName
+                && approvedNumber && approvedDate)
     }
 
     private fun maskDataControl() {
@@ -131,7 +127,7 @@ class RegisterCardActivity : AppCompatActivity() {
     }
 
     private fun maskNumberCardControl() {
-        if (maskNumberControl) {
+       if (maskNumberControl) {
             maskNumberControl = false
             val maskNumberCard = Utils.maskNumberCard(registerViewModel.card.value?.numberCard)
             binding.numberCardEd.setText(maskNumberCard)
@@ -162,16 +158,19 @@ class RegisterCardActivity : AppCompatActivity() {
 
     private fun clickRegisterCard() {
         paymentButton.setOnClickListener {
-            this.registerViewModel.saveCard()
-            verifyCredCardValide()
-            val intent = Intent(this, PaymentActivity::class.java)
-            intent.putExtra(resources.getString(R.string.UserPayment), registerViewModel.user)
-            intent.putExtra(resources.getString(R.string.cardPayment), registerViewModel.card.value)
+             if (verifyCredCardValide()) {
+                if (registerViewModel.saveCard()) {
+                    val intent = Intent(this, PaymentActivity::class.java)
+                    intent.putExtra(
+                        resources.getString(R.string.UserPayment),
+                        registerViewModel.user
+                    )
 
-            startActivity(intent)
+                    startActivity(intent)
+                }
+            }
         }
     }
-
 }
 
 

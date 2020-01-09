@@ -13,4 +13,9 @@ class ContactsViewModel(val repository: Repository) : ViewModel() {
     fun requestUsers() {
         repository.getUser(listUser)
     }
+
+    fun verifyHasCard(): Boolean {
+        val cards = repository.getCardDb()
+        return cards.size > 1
+    }
 }

@@ -7,23 +7,37 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.teste.R
 import com.example.teste.data.model.User
+import com.example.teste.features.paymentFeature.CardPrimingViewModel
 import com.example.teste.features.registerCard.RegisterCardActivity
 import kotlinx.android.synthetic.main.activity_card_priming.*
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CardPrimingActivity : AppCompatActivity() {
-
+        private val viewModelPriming: CardPrimingViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_card_priming)
         setToolbar()
         recoveryData()
+        clickButton()
     }
 
+    private fun clickButton() {
+        registerACard.setOnClickListener {
+            nextActivity()
+        }
+    }
     private fun recoveryData() {
         val user = intent.getSerializableExtra(resources.getString(R.string.UserPayment)) as User
+        viewModelPriming.setupUser(user)
         Toast.makeText(this, user.name, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun nextActivity() {
         val intent = Intent(this, RegisterCardActivity::class.java)
-        intent.putExtra(resources.getString(R.string.UserPayment), user)
+        intent.putExtra(resources.getString(R.string.UserPayment), viewModelPriming.user
+        )
         startActivity(intent)
     }
 

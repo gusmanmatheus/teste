@@ -35,7 +35,7 @@ object Utils {
             }
             return numberCardAux1
         }
-        return ""
+        return numberCard?:""
     }
 
     fun maskValue(editText: EditText): String {
