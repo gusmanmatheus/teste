@@ -3,10 +3,8 @@ package com.example.teste.features.contactsFeature
 import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.content.ContextCompat
@@ -18,11 +16,10 @@ import com.example.teste.R
 import com.example.teste.adapter.AdapterRC
 import com.example.teste.data.remote.Resources
 import com.example.teste.databinding.ActivityContactsBinding
-import com.example.teste.features.primingCard.CardPriming
+import com.example.teste.features.primingCard.CardPrimingActivity
 import kotlinx.android.synthetic.main.activity_contacts.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 
 class ContactsActivity : AppCompatActivity() {
     private val contactsViewModel: ContactsViewModel by viewModel()
@@ -43,7 +40,6 @@ class ContactsActivity : AppCompatActivity() {
 
     private fun setBinding() {
         binding.viewModel = contactsViewModel
-        binding.lifecycleOwner = this
     }
 
     private fun setAdapter() {
@@ -59,7 +55,7 @@ class ContactsActivity : AppCompatActivity() {
     private fun clickAdapter() {
         adapter.onItemClick = {
             //            Toast.makeText(this,it.name,Toast.LENGTH_LONG).show()
-            val intent = Intent(this, CardPriming::class.java)
+            val intent = Intent(this, CardPrimingActivity::class.java)
             intent.putExtra(resources.getString(R.string.UserPayment), it)
             startActivity(intent)
         }
@@ -121,11 +117,11 @@ class ContactsActivity : AppCompatActivity() {
                 ContextCompat.getDrawable(baseContext, R.drawable.ic_launcher_background)
 
             searchIcon.setColorFilter(
-                ResourcesCompat.getColor(resources, R.color.whinte, null),
+                ResourcesCompat.getColor(resources, R.color.white, null),
                 PorterDuff.Mode.SRC_ATOP
             )
             searchIconX.setColorFilter(
-                ResourcesCompat.getColor(resources, R.color.whinte, null),
+                ResourcesCompat.getColor(resources, R.color.white, null),
                 PorterDuff.Mode.SRC_ATOP
             )
             searchView.background =

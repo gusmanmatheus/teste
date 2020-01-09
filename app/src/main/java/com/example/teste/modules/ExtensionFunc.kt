@@ -35,10 +35,9 @@ fun String.containsNumber(): Boolean {
 }
 
 
-
 fun EditText.verifyFieldHasVoids(vararg editText: EditText): Boolean {
-        return editText.any{ it.text.isEmpty() }
-    }
+    return editText.any { it.text.isEmpty() }
+}
 
 fun EditText.changeText(change: () -> Unit) {
     this.addTextChangedListener(

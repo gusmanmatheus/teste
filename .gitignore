@@ -7,6 +7,7 @@
 *.apk
 *.ap_
 *.aab
+#git Ignore
 
 # Files for the ART/Dalvik VM
 *.dex
@@ -164,6 +165,8 @@ obj/
 .Trashes
 ehthumbs.db
 Thumbs.db
+#Sonar
+.idea/sonarlint/
 
 # Legacy Eclipse project files
 .classpath

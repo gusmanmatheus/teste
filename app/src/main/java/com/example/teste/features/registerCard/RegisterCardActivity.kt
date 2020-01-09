@@ -1,13 +1,17 @@
 package com.example.teste.features.registerCard
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import com.example.teste.R
+import com.example.teste.data.model.User
 import com.example.teste.databinding.ActivityRegisterCardBinding
+import com.example.teste.features.paymentFeature.PaymentActivity
 import com.example.teste.modules.Utils
 import com.example.teste.modules.changeText
 import com.example.teste.modules.verifyFieldHasVoids
@@ -17,7 +21,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegisterCardActivity : AppCompatActivity() {
     private val registerViewModel: RegisterCardViewModel by viewModel()
-    lateinit var binding: ActivityRegisterCardBinding
+    private lateinit var binding: ActivityRegisterCardBinding
     private var maskDtControl = true
     private var maskNumberControl = true
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,12 +29,17 @@ class RegisterCardActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_register_card)
         binding.lifecycleOwner = this
         binding.viewModel = this.registerViewModel
-
-
+        recoveryUser()
+        setToolbar()
         controlVisibilityButton()
         observableFields()
         clickRegisterCard()
 
+    }
+
+    private fun recoveryUser() {
+        val user = intent.getSerializableExtra(resources.getString(R.string.UserPayment)) as User
+        registerViewModel.userRecovery(user)
     }
 
     private fun observableFields() {
@@ -53,7 +62,7 @@ class RegisterCardActivity : AppCompatActivity() {
     }
 
     private fun controlVisibilityButton() {
-        RegisterCard.isVisible = !EditText(this).verifyFieldHasVoids(
+        paymentButton.isVisible = !EditText(this).verifyFieldHasVoids(
             holderNameEd,
             numberCardEd,
             cvvCardEd,
@@ -132,14 +141,37 @@ class RegisterCardActivity : AppCompatActivity() {
         }
     }
 
+    private fun setToolbar() {
+        setSupportActionBar(toolbarRegister)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.title = ""
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.back_left_48dp)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home
+            -> {
+                onBackPressed()
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+        return true
+    }
 
     private fun clickRegisterCard() {
-        RegisterCard.setOnClickListener {
+        paymentButton.setOnClickListener {
             this.registerViewModel.saveCard()
             verifyCredCardValide()
+            val intent = Intent(this, PaymentActivity::class.java)
+            intent.putExtra(resources.getString(R.string.UserPayment), registerViewModel.user)
+            intent.putExtra(resources.getString(R.string.cardPayment), registerViewModel.card.value)
 
+            startActivity(intent)
         }
     }
+
 }
 
 
