@@ -8,18 +8,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import com.example.teste.R
+import com.example.teste.data.model.User
 import com.example.teste.databinding.ActivityRegisterCardBinding
 import com.example.teste.features.paymentFeature.PaymentActivity
 import com.example.teste.modules.Utils
 import com.example.teste.modules.changeText
 import com.example.teste.modules.verifyFieldHasVoids
 import kotlinx.android.synthetic.main.activity_register_card.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 
 class RegisterCardActivity : AppCompatActivity() {
     private val registerViewModel: RegisterCardViewModel by viewModel()
-    lateinit var binding: ActivityRegisterCardBinding
+    private lateinit var binding: ActivityRegisterCardBinding
     private var maskDtControl = true
     private var maskNumberControl = true
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,14 +30,16 @@ class RegisterCardActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_register_card)
         binding.lifecycleOwner = this
         binding.viewModel = this.registerViewModel
-
-
+        recoveryUser()
         controlVisibilityButton()
         observableFields()
         clickRegisterCard()
 
     }
-
+    private fun recoveryUser(){
+        val user = intent.getSerializableExtra(resources.getString(R.string.UserPayment)) as User
+      registerViewModel.userRecovery(user)
+    }
     private fun observableFields() {
         holderNameEd.changeText {
             controlVisibilityButton()
@@ -139,7 +144,11 @@ class RegisterCardActivity : AppCompatActivity() {
         paymentButton.setOnClickListener {
             this.registerViewModel.saveCard()
             verifyCredCardValide()
-        startActivity(Intent(this,PaymentActivity::class.java))
+            val intent = Intent(this,PaymentActivity::class.java)
+            intent.putExtra(resources.getString(R.string.UserPayment), registerViewModel.user)
+            intent.putExtra(resources.getString(R.string.cardPayment), registerViewModel.card.value)
+
+            startActivity(intent)
         }
     }
 }

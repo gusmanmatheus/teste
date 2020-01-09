@@ -21,8 +21,8 @@ class PaymentViewModel : ViewModel() {
         this._creditCard.value = creditCard
     }
 
-    fun setUser(user: User) {
-        this._user.value = user
-    }
+        fun setUser(user: User) {
+            this._user.value = user
+        }
 
 }

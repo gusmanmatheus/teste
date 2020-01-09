@@ -5,16 +5,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.teste.data.model.CreditCard
+import com.example.teste.data.model.User
 import com.example.teste.modules.containsNumber
 
 class RegisterCardViewModel : ViewModel() {
 
     private var _card = MutableLiveData<CreditCard>()
     var card: LiveData<CreditCard> = _card
+    lateinit var user: User
 
-
+    fun userRecovery(user:User){
+        this.user = user
+    }
     init {
-        _card.postValue(CreditCard("", "", "", ""))
+         _card.postValue(CreditCard("", "", "", ""))
     }
 
     fun verifyNumeberCharacterCvv(cvv: String) = cvv.length == 3

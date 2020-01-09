@@ -23,6 +23,7 @@ class PaymentActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_payment)
         binding.lifecycleOwner = this
          binding.viewModel = this.paymentViewModel
+        recoveryData()
         setObservables()
     }
 
@@ -33,8 +34,8 @@ class PaymentActivity : AppCompatActivity() {
 
     private fun observableValue() {
         paymentViewModel.valuePayment.observe(this, Observer {
-            if (it > "") {
-                val value = it.replace(",",".").toDouble()
+            if (it != "") {
+                val value = it.replace(",",".").replace(".","").toDouble()
                 changeColorTextValuePayment(value > 0.0)
             }
         })
@@ -44,10 +45,13 @@ class PaymentActivity : AppCompatActivity() {
         valuePayment.changeText {
             if (maskPayControl) {
                 maskPayControl = false
-                 Utils.maskValue(binding.valuePayment)
+               paymentViewModel._valuePayment.value = Utils.maskValue(binding.valuePayment)
+                binding.valuePayment.setSelection(binding.valuePayment.text.length-1)
             } else {
                 maskPayControl = true
             }
+            binding.valuePayment.setSelection(binding.valuePayment.text.length)
+
         }
     }
 
@@ -70,14 +74,18 @@ class PaymentActivity : AppCompatActivity() {
             )
         }
     }
+    private fun recoveryData(){
+        recoveryCreditCard()
+        recoveryUser()
+    }
 
     private fun recoveryUser() {
-        val user = intent.getSerializableExtra("") as User
+        val user = intent.getSerializableExtra(resources.getString(R.string.UserPayment)) as User
         paymentViewModel.setUser(user)
     }
 
     private fun recoveryCreditCard() {
-        val creditCard = intent.getSerializableExtra("") as CreditCard
+        val creditCard = intent.getSerializableExtra(resources.getString(R.string.cardPayment)) as CreditCard
         paymentViewModel.setCreditCard(creditCard)
     }
 

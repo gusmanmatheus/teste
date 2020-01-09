@@ -16,7 +16,7 @@ import com.example.teste.R
 import com.example.teste.adapter.AdapterRC
 import com.example.teste.data.remote.Resources
 import com.example.teste.databinding.ActivityContactsBinding
-import com.example.teste.features.primingCard.CardPriming
+import com.example.teste.features.primingCard.CardPrimingActivity
 import kotlinx.android.synthetic.main.activity_contacts.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -56,7 +56,7 @@ class ContactsActivity : AppCompatActivity() {
     private fun clickAdapter() {
         adapter.onItemClick = {
             //            Toast.makeText(this,it.name,Toast.LENGTH_LONG).show()
-            val intent = Intent(this, CardPriming::class.java)
+            val intent = Intent(this, CardPrimingActivity::class.java)
             intent.putExtra(resources.getString(R.string.UserPayment), it)
             startActivity(intent)
         }

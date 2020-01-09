@@ -18,7 +18,7 @@
             android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name=".features.registerCard.RegisterCardActivity"
             android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".features.primingCard.CardPriming" />
+        <activity android:name=".features.primingCard.CardPrimingActivity" />
         <activity android:name=".features.contactsFeature.ContactsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -5,6 +5,7 @@ import com.example.teste.adapter.AdapterRC
 import com.example.teste.features.contactsFeature.ContactsActivity
 import com.example.teste.features.contactsFeature.ContactsViewModel
 import com.example.teste.data.Repository
+import com.example.teste.data.model.User
 import com.example.teste.data.remote.RemoteDataSource
 import com.example.teste.databinding.ActivityContactsBinding
 import com.example.teste.features.paymentFeature.PaymentViewModel
@@ -36,11 +37,11 @@ val contactsModule = module {
     }
 
 }
-val registerCardModule =  module {
+val registerCardModule = module {
     viewModel { RegisterCardViewModel() }
 }
 
-val paymentModule = module{
+val paymentModule = module {
     viewModel { PaymentViewModel() }
 }
 

@@ -1,6 +1,5 @@
 package com.example.teste.modules
 
-import android.text.Editable
 import android.widget.EditText
 import java.math.BigDecimal
 import java.text.DecimalFormat
@@ -50,10 +49,9 @@ object Utils {
             BigDecimal(cleanString).divide(BigDecimal("100"))
         }
 
-        val formatted = moneyFormatterForTextWatcher(parsed)
-        editText.setText(formatted)
-        editText.setSelection(formatted.length)
-     return  ""
+        //        editText.setText(formatted)
+//        editText.setSelection(formatted.length)
+     return  moneyFormatterForTextWatcher(parsed)
 }
 private fun moneyFormatterForTextWatcher(number: BigDecimal): String {
     val fmt = NumberFormat.getInstance(Locale("por", "BR")) as DecimalFormat

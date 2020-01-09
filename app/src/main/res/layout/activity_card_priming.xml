@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/blackBackGround"
-        tools:context=".features.primingCard.CardPriming">
+        tools:context=".features.primingCard.CardPrimingActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
