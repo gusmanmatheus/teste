@@ -40,7 +40,6 @@ class ContactsActivity : AppCompatActivity() {
 
     private fun setBinding() {
         binding.viewModel = contactsViewModel
-        binding.lifecycleOwner = this
     }
 
     private fun setAdapter() {

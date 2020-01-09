@@ -3,6 +3,7 @@ package com.example.teste.features.registerCard
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -15,9 +16,7 @@ import com.example.teste.modules.Utils
 import com.example.teste.modules.changeText
 import com.example.teste.modules.verifyFieldHasVoids
 import kotlinx.android.synthetic.main.activity_register_card.*
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 
 
 class RegisterCardActivity : AppCompatActivity() {
@@ -31,15 +30,18 @@ class RegisterCardActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.viewModel = this.registerViewModel
         recoveryUser()
+        setToolbar()
         controlVisibilityButton()
         observableFields()
         clickRegisterCard()
 
     }
-    private fun recoveryUser(){
+
+    private fun recoveryUser() {
         val user = intent.getSerializableExtra(resources.getString(R.string.UserPayment)) as User
-      registerViewModel.userRecovery(user)
+        registerViewModel.userRecovery(user)
     }
+
     private fun observableFields() {
         holderNameEd.changeText {
             controlVisibilityButton()
@@ -139,18 +141,37 @@ class RegisterCardActivity : AppCompatActivity() {
         }
     }
 
+    private fun setToolbar() {
+        setSupportActionBar(toolbarRegister)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.title = ""
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.back_left_48dp)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home
+            -> {
+                onBackPressed()
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+        return true
+    }
 
     private fun clickRegisterCard() {
         paymentButton.setOnClickListener {
             this.registerViewModel.saveCard()
             verifyCredCardValide()
-            val intent = Intent(this,PaymentActivity::class.java)
+            val intent = Intent(this, PaymentActivity::class.java)
             intent.putExtra(resources.getString(R.string.UserPayment), registerViewModel.user)
             intent.putExtra(resources.getString(R.string.cardPayment), registerViewModel.card.value)
 
             startActivity(intent)
         }
     }
+
 }
 
 

@@ -14,11 +14,12 @@ class RegisterCardViewModel : ViewModel() {
     var card: LiveData<CreditCard> = _card
     lateinit var user: User
 
-    fun userRecovery(user:User){
+    fun userRecovery(user: User) {
         this.user = user
     }
+
     init {
-         _card.postValue(CreditCard("", "", "", ""))
+        _card.postValue(CreditCard("", "", "", ""))
     }
 
     fun verifyNumeberCharacterCvv(cvv: String) = cvv.length == 3

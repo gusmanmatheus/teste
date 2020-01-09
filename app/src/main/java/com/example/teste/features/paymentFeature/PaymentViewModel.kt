@@ -17,12 +17,13 @@ class PaymentViewModel : ViewModel() {
     init {
         _valuePayment.value = "0.00"
     }
+
     fun setCreditCard(creditCard: CreditCard) {
         this._creditCard.value = creditCard
     }
 
-        fun setUser(user: User) {
-            this._user.value = user
-        }
+    fun setUser(user: User) {
+        this._user.value = user
+    }
 
 }

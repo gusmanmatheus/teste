@@ -13,5 +13,6 @@
     <string name="numberCardHint">Número do cartão</string>
     <string name="holderNameHint">Nome titular</string>
     <string name="expirationDateHint">Vencimento</string>
-
+    <string name="ball">" •"</string>
+    <string name="masterCard">MasterCard</string>
 </resources>

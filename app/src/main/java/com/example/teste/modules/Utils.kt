@@ -39,7 +39,7 @@ object Utils {
     }
 
     fun maskValue(editText: EditText): String {
-         val typedText = editText.editableText.toString()
+        val typedText = editText.editableText.toString()
         val parsed: BigDecimal
 
         parsed = if (typedText.isEmpty()) {
@@ -48,25 +48,23 @@ object Utils {
             val cleanString = typedText.replace("[,. ]".toRegex(), "")
             BigDecimal(cleanString).divide(BigDecimal("100"))
         }
-
-        //        editText.setText(formatted)
-//        editText.setSelection(formatted.length)
-     return  moneyFormatterForTextWatcher(parsed)
-}
-private fun moneyFormatterForTextWatcher(number: BigDecimal): String {
-    val fmt = NumberFormat.getInstance(Locale("por", "BR")) as DecimalFormat
-    fmt.isGroupingUsed = true
-    fmt.minimumFractionDigits = 2
-    fmt.maximumFractionDigits = 2
-    return fmt.format(number)
-}
-
-
-fun cleanMoneyText(text: String): Double{
-    return if(text.isNotEmpty()) {
-        text.replace("[.]".toRegex(), "").replace("[,]".toRegex(), ".").toDouble()
-    }else{
-        0.0
+        return moneyFormatterForTextWatcher(parsed)
     }
-}
+
+    private fun moneyFormatterForTextWatcher(number: BigDecimal): String {
+        val fmt = NumberFormat.getInstance(Locale("por", "BR")) as DecimalFormat
+        fmt.isGroupingUsed = true
+        fmt.minimumFractionDigits = 2
+        fmt.maximumFractionDigits = 2
+        return fmt.format(number)
+    }
+
+
+    fun cleanMoneyText(text: String): Double {
+        return if (text.isNotEmpty()) {
+            text.replace("[.]".toRegex(), "").replace("[,]".toRegex(), ".").toDouble()
+        } else {
+            0.0
+        }
+    }
 }

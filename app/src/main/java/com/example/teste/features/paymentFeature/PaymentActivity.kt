@@ -1,7 +1,9 @@
 package com.example.teste.features.paymentFeature
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -22,8 +24,10 @@ class PaymentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_payment)
         binding.lifecycleOwner = this
-         binding.viewModel = this.paymentViewModel
+        binding.viewModel = this.paymentViewModel
+        setToolbar()
         recoveryData()
+        showNumberCard()
         setObservables()
     }
 
@@ -35,7 +39,7 @@ class PaymentActivity : AppCompatActivity() {
     private fun observableValue() {
         paymentViewModel.valuePayment.observe(this, Observer {
             if (it != "") {
-                val value = it.replace(",",".").replace(".","").toDouble()
+                val value = it.replace(",", ".").replace(".", "").toDouble()
                 changeColorTextValuePayment(value > 0.0)
             }
         })
@@ -45,8 +49,8 @@ class PaymentActivity : AppCompatActivity() {
         valuePayment.changeText {
             if (maskPayControl) {
                 maskPayControl = false
-               paymentViewModel._valuePayment.value = Utils.maskValue(binding.valuePayment)
-                binding.valuePayment.setSelection(binding.valuePayment.text.length-1)
+                paymentViewModel._valuePayment.value = Utils.maskValue(binding.valuePayment)
+                binding.valuePayment.setSelection(binding.valuePayment.text.length - 1)
             } else {
                 maskPayControl = true
             }
@@ -74,7 +78,15 @@ class PaymentActivity : AppCompatActivity() {
             )
         }
     }
-    private fun recoveryData(){
+
+    private fun showNumberCard() {
+        var ballValue =
+            resources.getString(R.string.masterCard) + " " + resources.getString(R.string.ball)
+        ballValue += " " + paymentViewModel.creditCard.value?.numberCard?.substring(0, 3)
+        masterCard.text = ballValue
+    }
+
+    private fun recoveryData() {
         recoveryCreditCard()
         recoveryUser()
     }
@@ -85,8 +97,28 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun recoveryCreditCard() {
-        val creditCard = intent.getSerializableExtra(resources.getString(R.string.cardPayment)) as CreditCard
+        val creditCard =
+            intent.getSerializableExtra(resources.getString(R.string.cardPayment)) as CreditCard
         paymentViewModel.setCreditCard(creditCard)
+    }
+
+    private fun setToolbar() {
+        setSupportActionBar(toolbarPayment)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.title = ""
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.back_left_48dp)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home
+            -> {
+                onBackPressed()
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+        return true
     }
 
 
