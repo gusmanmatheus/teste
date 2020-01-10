@@ -16,6 +16,7 @@ import com.example.teste.data.model.CreditCard
 import com.example.teste.data.model.User
 import com.example.teste.data.remote.Resources
 import com.example.teste.databinding.ActivityPaymentBinding
+import com.example.teste.features.receiptFeature.ReceiptPayment
 import com.example.teste.features.registerCard.RegisterCardActivity
 import com.example.teste.modules.Utils
 import com.example.teste.modules.changeText
@@ -39,18 +40,20 @@ class PaymentActivity : AppCompatActivity() {
         makePayment()
         nextActivity()
     }
-    companion object{
-        private const val EXTRA_USER = "EXTRA_USER"
-        private fun newIntent(context: Context,user: User):Intent{
-            return Intent(context,PaymentActivity::class.java).apply{
-                putExtra(EXTRA_USER,user)
-            }
-        }
-            fun startActivity(activity: Activity, user: User){
-                activity.startActivity(newIntent(activity,user))
 
+    companion object {
+        private const val EXTRA_USER = "EXTRA_USER"
+        private fun newIntent(context: Context, user: User): Intent {
+            return Intent(context, PaymentActivity::class.java).apply {
+                putExtra(EXTRA_USER, user)
             }
         }
+
+        fun startActivity(activity: Activity, user: User) {
+            activity.startActivity(newIntent(activity, user))
+
+        }
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when {
@@ -115,6 +118,8 @@ class PaymentActivity : AppCompatActivity() {
                     Resources.StatusRequest.SUCCES -> {
                         paymentButton.isClickable = true
                         it.data?.let { data ->
+                            val receipt = ReceiptPayment( )
+                            receipt.show(supportFragmentManager, receipt.tag)
                             Log.i("xrl8", data.toString() + "XD")
                         }
                     }
@@ -160,10 +165,13 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun showNumberCard() {
-        val lengthNumerCard = paymentViewModel.creditCard.value?.numberCard?.length ?:16
+        val lengthNumerCard = paymentViewModel.creditCard.value?.numberCard?.length ?: 16
         var ballValue =
             resources.getString(R.string.masterCard) + " " + resources.getString(R.string.ball)
-        ballValue += " " + paymentViewModel.creditCard.value?.numberCard?.substring(lengthNumerCard-4, lengthNumerCard-1)
+        ballValue += " " + paymentViewModel.creditCard.value?.numberCard?.substring(
+            lengthNumerCard - 4,
+            lengthNumerCard - 1
+        )
         masterCard.text = ballValue
     }
 
