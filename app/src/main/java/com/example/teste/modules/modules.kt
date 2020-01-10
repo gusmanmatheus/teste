@@ -42,6 +42,6 @@ val registerCardModule = module {
 }
 
 val paymentModule = module {
-    viewModel { PaymentViewModel() }
+    viewModel { PaymentViewModel(get()) }
 }
 

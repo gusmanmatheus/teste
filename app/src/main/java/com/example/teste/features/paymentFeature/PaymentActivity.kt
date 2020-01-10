@@ -1,15 +1,16 @@
 package com.example.teste.features.paymentFeature
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.teste.R
 import com.example.teste.data.model.CreditCard
 import com.example.teste.data.model.User
+import com.example.teste.data.remote.Resources
 import com.example.teste.databinding.ActivityPaymentBinding
 import com.example.teste.modules.Utils
 import com.example.teste.modules.changeText
@@ -29,11 +30,14 @@ class PaymentActivity : AppCompatActivity() {
         recoveryData()
         showNumberCard()
         setObservables()
+        makePayment()
     }
 
     private fun setObservables() {
         observableValue()
         observablePoint()
+        observePaymentResult()
+
     }
 
     private fun observableValue() {
@@ -59,6 +63,31 @@ class PaymentActivity : AppCompatActivity() {
         }
     }
 
+    private fun observePaymentResult() {
+        paymentViewModel.paymentResult.observe(this, Observer {
+            it?.let {
+                when (it.status) {
+                    Resources.StatusRequest.SUCCES -> {
+                        paymentButton.isClickable = true
+                        it.data?.let { data ->
+                            Log.i("xrl8", data.toString() + "XD")
+                        }
+                    }
+                    Resources.StatusRequest.ERROR -> {
+                        paymentButton.isClickable = true
+                        it.error?.let { error ->
+                            Log.i("xrl8", error.toString() + "XD")
+                        }
+
+                    }
+                    Resources.StatusRequest.LOADING -> {
+                        paymentButton.isClickable = false
+                    }
+                }
+            }
+        })
+    }
+
     private fun changeColorTextValuePayment(condition: Boolean) {
         if (condition) {
             valuePayment.setTextColor(
@@ -76,6 +105,12 @@ class PaymentActivity : AppCompatActivity() {
                     null
                 )
             )
+        }
+    }
+
+    private fun makePayment() {
+        paymentButton.setOnClickListener {
+            paymentViewModel.sendPayment()
         }
     }
 
