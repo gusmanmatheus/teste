@@ -38,11 +38,12 @@ class PaymentActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when {
             RegisterCardActivity.isOrigin(requestCode) -> {
-                val creditCard = RegisterCardActivity.getCreditCard(resultCode,data)
+                val creditCard = RegisterCardActivity.getCreditCard(resultCode, data)
                 creditCard?.let {
-                    paymentViewModel.setupCreditCard(it)
+                    binding.viewModel?.setupCreditCard(it)
+                    showNumberCard()
                 }
-                if (paymentViewModel.creditCard.value == null){
+                if (paymentViewModel.creditCard.value == null) {
                     finish()
                 }
             }
@@ -55,7 +56,7 @@ class PaymentActivity : AppCompatActivity() {
     private fun startActivity() {
         if (!paymentViewModel.verifyHasCard()) {
             paymentViewModel.user.value?.let {
-                RegisterCardActivity.startActivityForResult(this, it,null)
+                RegisterCardActivity.startActivityForResult(this, it, null)
             }
         }
     }
@@ -109,9 +110,10 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun showNumberCard() {
+        val lengthNumerCard = paymentViewModel.creditCard.value?.numberCard?.length ?:16
         var ballValue =
             resources.getString(R.string.masterCard) + " " + resources.getString(R.string.ball)
-        ballValue += " " + paymentViewModel.creditCard.value?.numberCard?.substring(0, 3)
+        ballValue += " " + paymentViewModel.creditCard.value?.numberCard?.substring(lengthNumerCard-4, lengthNumerCard-1)
         masterCard.text = ballValue
     }
 
@@ -135,8 +137,9 @@ class PaymentActivity : AppCompatActivity() {
 
     private fun editCardClick() {
         editCard.setOnClickListener {
+            val creditCard = paymentViewModel.creditCard.value
             paymentViewModel.user.value?.let {
-                RegisterCardActivity.startActivityForResult(this, it,null)
+                RegisterCardActivity.startActivityForResult(this, it, creditCard)
             }
         }
     }

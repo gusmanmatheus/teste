@@ -18,7 +18,6 @@ import com.example.teste.data.model.User
 import com.example.teste.data.remote.Resources
 import com.example.teste.databinding.ActivityContactsBinding
 import com.example.teste.features.paymentFeature.PaymentActivity
-import com.example.teste.features.primingCard.CardPrimingActivity
 import kotlinx.android.synthetic.main.activity_contacts.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel

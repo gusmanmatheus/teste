@@ -107,7 +107,7 @@ class RegisterCardActivity : AppCompatActivity() {
     }
 
 
-    private fun verifyCredCardValide(): Boolean {
+    private fun verifyCredCardValidate(): Boolean {
         val approvedCvv =
             registerViewModel.verifyNumeberCharacterCvv(registerViewModel.card.value?.cvvCard ?: "")
         val approvedName = registerViewModel.verifyNameContainsNumber(
@@ -194,7 +194,7 @@ class RegisterCardActivity : AppCompatActivity() {
 
     private fun clickRegisterCard() {
         paymentButton.setOnClickListener {
-            if (verifyCredCardValide()) {
+            if (verifyCredCardValidate()) {
                 if (registerViewModel.saveCard()) {
                     registerViewModel.card.value?.let {
                         finishWithResult(it)
