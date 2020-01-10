@@ -163,7 +163,7 @@
 
 
         <Button
-            android:id="@+id/paymentButton"
+            android:id="@+id/salveCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -178,6 +178,18 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             tools:visibility="visible" />
+
+        <include
+            android:id="@+id/primingView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            layout="@layout/view_priming_card"
+             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbarRegister"
+            android:visibility="gone"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

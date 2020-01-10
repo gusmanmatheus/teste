@@ -34,7 +34,7 @@
             android:text="@string/registerACardText"
             android:textColor="@color/white"
             android:textSize="@dimen/text_big32"
-            app:layout_constraintBottom_toTopOf="@id/registerCard"
+            app:layout_constraintBottom_toTopOf="@id/registerACard"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
@@ -54,7 +54,7 @@
             app:layout_constraintTop_toBottomOf="@id/registerCardText" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/registerCard"
+            android:id="@+id/registerACard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_small16"

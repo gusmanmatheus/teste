@@ -4,11 +4,13 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.teste.data.Repository
 import com.example.teste.data.model.CreditCard
 import com.example.teste.data.model.User
 import com.example.teste.modules.containsNumber
+import com.example.teste.modules.repositoryData
 
-class RegisterCardViewModel : ViewModel() {
+class RegisterCardViewModel(private val repository: Repository) : ViewModel() {
 
     private var _card = MutableLiveData<CreditCard>()
     var card: LiveData<CreditCard> = _card
@@ -19,7 +21,7 @@ class RegisterCardViewModel : ViewModel() {
     }
 
     init {
-        _card.postValue(CreditCard("", "", "", ""))
+        _card.postValue(CreditCard(1, "", "", "", ""))
     }
 
     fun verifyNumeberCharacterCvv(cvv: String) = cvv.length == 3
@@ -39,26 +41,21 @@ class RegisterCardViewModel : ViewModel() {
         return !name.containsNumber()
     }
 
-    private fun verifyCredCardValide() {
-        if (verifyNumeberCharacterCvv(_card.value?.cvvCard ?: "")
-            && verifyValidateDate(
-                _card.value?.expirationDate ?: ""
-            )
-            && verifyNameContainsNumber(
-                _card.value?.holderName ?: ""
-            )
-            && verifyNumeberCharacterNumberCard(
-                _card.value?.numberCard ?: ""
-            )
-        ) {
-            Log.i("xrl8", "passou")
+    fun saveCard(): Boolean {
+        val newCard = repository.getCardDb()
+        if (newCard.isNotEmpty()) {
+            card.value?.let {
+                val cardAtt = it
+                 repository.attCard(cardAtt)
+                return true
+            } ?: run { return false }
+        } else {
+            card.value?.let {
+                repository.insertCard(it)
+                return true
+            } ?: run {
+                return false
+            }
         }
     }
-
-    fun saveCard() {
-        verifyCredCardValide()
-    }
-//    fun insertCardInDB(card: CreditCard): Boolean {
-//
-//    }
 }
