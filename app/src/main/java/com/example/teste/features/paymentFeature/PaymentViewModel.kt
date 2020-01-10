@@ -19,11 +19,20 @@ class PaymentViewModel(private val repository: Repository) : ViewModel() {
     init {
         _valuePayment.value = "0.00"
     }
-
-    fun setupCreditCard() {
-       val creditCards = repository.getCardDb()
-        this._creditCard.value = creditCards[0]
+    fun setupCreditCard(creditCard: CreditCard){
+        _creditCard.value = creditCard
     }
+    fun setupCreditCard() {
+        val creditCards = repository.getCardDb()
+        if (creditCards.isNotEmpty()) {
+            this._creditCard.value = creditCards[0]
+        }
+    }
+        fun verifyHasCard(): Boolean {
+            setupCreditCard()
+            return _creditCard.value != null
+        }
+
 
     fun setUser(user: User) {
         this._user.value = user

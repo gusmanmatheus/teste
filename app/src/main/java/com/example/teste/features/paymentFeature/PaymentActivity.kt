@@ -1,5 +1,6 @@
 package com.example.teste.features.paymentFeature
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -8,6 +9,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.teste.R
+import com.example.teste.data.model.CreditCard
 import com.example.teste.data.model.User
 import com.example.teste.databinding.ActivityPaymentBinding
 import com.example.teste.features.registerCard.RegisterCardActivity
@@ -30,6 +32,32 @@ class PaymentActivity : AppCompatActivity() {
         showNumberCard()
         setObservables()
         setClicks()
+        startActivity()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when {
+            RegisterCardActivity.isOrigin(requestCode) -> {
+                val creditCard = RegisterCardActivity.getCreditCard(resultCode,data)
+                creditCard?.let {
+                    paymentViewModel.setupCreditCard(it)
+                }
+                if (paymentViewModel.creditCard.value == null){
+                    finish()
+                }
+            }
+            else -> super.onActivityResult(requestCode, resultCode, data)
+
+        }
+
+    }
+
+    private fun startActivity() {
+        if (!paymentViewModel.verifyHasCard()) {
+            paymentViewModel.user.value?.let {
+                RegisterCardActivity.startActivityForResult(this, it,null)
+            }
+        }
     }
 
     private fun setObservables() {
@@ -86,6 +114,7 @@ class PaymentActivity : AppCompatActivity() {
         ballValue += " " + paymentViewModel.creditCard.value?.numberCard?.substring(0, 3)
         masterCard.text = ballValue
     }
+
     private fun recoveryData() {
         recoveryCreditCard()
         recoveryUser()
@@ -97,20 +126,21 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun recoveryCreditCard() {
-          paymentViewModel.setupCreditCard()
+        paymentViewModel.setupCreditCard()
     }
 
-    private fun setClicks(){
+    private fun setClicks() {
         editCardClick()
     }
-    private fun editCardClick(){
+
+    private fun editCardClick() {
         editCard.setOnClickListener {
-            val intent = Intent(this,RegisterCardActivity::class.java)
-            intent.putExtra(resources.getString(R.string.UserPayment),paymentViewModel.user.value)
-             startActivity(intent)
+            paymentViewModel.user.value?.let {
+                RegisterCardActivity.startActivityForResult(this, it,null)
+            }
         }
     }
-    private fun paymentClick(){}
+
 
     private fun setToolbar() {
         setSupportActionBar(toolbarPayment)

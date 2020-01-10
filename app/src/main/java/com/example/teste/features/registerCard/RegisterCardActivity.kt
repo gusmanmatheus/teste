@@ -1,17 +1,18 @@
 package com.example.teste.features.registerCard
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import com.example.teste.R
+import com.example.teste.data.model.CreditCard
 import com.example.teste.data.model.User
 import com.example.teste.databinding.ActivityRegisterCardBinding
-import com.example.teste.features.paymentFeature.PaymentActivity
 import com.example.teste.modules.Utils
 import com.example.teste.modules.changeText
 import com.example.teste.modules.verifyFieldHasVoids
@@ -34,11 +35,46 @@ class RegisterCardActivity : AppCompatActivity() {
         controlVisibilityButton()
         observableFields()
         clickRegisterCard()
+        val card = intent.getSerializableExtra(EXTRA_CARD) as? CreditCard
+        if(card == null){
+            primingView.isVisible = true
+        }
+    }
 
+    companion object {
+        private const val REQUEST_REGISTER_CARD_CODE = 15000
+        private const val EXTRA_CREDIT_CARD = "EXTRA_CREDIT_CARD"
+        private const val EXTRA_USER = "EXTRA_USER"
+        private const val EXTRA_CARD = "EXTRA_CARD"
+
+
+        private fun newIntent(context: Context, user: User,creditCard: CreditCard?): Intent {
+            return Intent(context, RegisterCardActivity()::class.java).apply {
+                putExtra(EXTRA_USER, user)
+                putExtra(EXTRA_CARD,creditCard)
+            }
+        }
+
+        fun startActivityForResult(activity: Activity, user: User,creditCard: CreditCard?) {
+            activity.startActivityForResult(
+                newIntent(activity, user,creditCard),
+                REQUEST_REGISTER_CARD_CODE)
+
+        }
+
+        fun isOrigin(requestCode: Int): Boolean {
+            return REQUEST_REGISTER_CARD_CODE == requestCode
+        }
+
+        fun getCreditCard(resultCode: Int, data: Intent?): CreditCard? {
+            return if (resultCode == Activity.RESULT_OK) {
+                data?.getSerializableExtra(EXTRA_CREDIT_CARD) as? CreditCard
+            } else null
+         }
     }
 
     private fun recoveryUser() {
-        val user = intent.getSerializableExtra(resources.getString(R.string.UserPayment)) as User
+        val user = intent.getSerializableExtra(EXTRA_USER) as User
         registerViewModel.userRecovery(user)
     }
 
@@ -127,7 +163,7 @@ class RegisterCardActivity : AppCompatActivity() {
     }
 
     private fun maskNumberCardControl() {
-       if (maskNumberControl) {
+        if (maskNumberControl) {
             maskNumberControl = false
             val maskNumberCard = Utils.maskNumberCard(registerViewModel.card.value?.numberCard)
             binding.numberCardEd.setText(maskNumberCard)
@@ -158,18 +194,22 @@ class RegisterCardActivity : AppCompatActivity() {
 
     private fun clickRegisterCard() {
         paymentButton.setOnClickListener {
-             if (verifyCredCardValide()) {
+            if (verifyCredCardValide()) {
                 if (registerViewModel.saveCard()) {
-                    val intent = Intent(this, PaymentActivity::class.java)
-                    intent.putExtra(
-                        resources.getString(R.string.UserPayment),
-                        registerViewModel.user
-                    )
-
-                    startActivity(intent)
+                    registerViewModel.card.value?.let {
+                        finishWithResult(it)
+                    }
                 }
             }
         }
+    }
+
+    private fun finishWithResult(creditCard: CreditCard) {
+        val intent = Intent().apply {
+            putExtra(EXTRA_CREDIT_CARD, creditCard)
+        }
+        setResult(Activity.RESULT_OK, intent)
+        finish()
     }
 }
 

@@ -9,15 +9,14 @@ import com.example.teste.R
 import com.example.teste.data.model.User
 import com.example.teste.features.paymentFeature.CardPrimingViewModel
 import com.example.teste.features.registerCard.RegisterCardActivity
-import kotlinx.android.synthetic.main.activity_card_priming.*
-import org.koin.android.ext.android.inject
+import kotlinx.android.synthetic.main.view_priming_card.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CardPrimingActivity : AppCompatActivity() {
         private val viewModelPriming: CardPrimingViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_card_priming)
+        setContentView(R.layout.view_priming_card)
         setToolbar()
         recoveryData()
         clickButton()
@@ -35,10 +34,11 @@ class CardPrimingActivity : AppCompatActivity() {
     }
 
     private fun nextActivity() {
-        val intent = Intent(this, RegisterCardActivity::class.java)
-        intent.putExtra(resources.getString(R.string.UserPayment), viewModelPriming.user
-        )
-        startActivity(intent)
+        RegisterCardActivity.startActivityForResult(this,viewModelPriming.user,null)
+
+//        val intent = Intent(this, RegisterCardActivity::class.java)
+//        intent.putExtra(resources.getString(R.string.UserPayment), viewModelPriming.user)
+//        startActivity(intent)
     }
 
     private fun setToolbar() {

@@ -61,15 +61,9 @@ class ContactsActivity : AppCompatActivity() {
     }
 
     private fun nextActivity(user: User) {
-        if (contactsViewModel.verifyHasCard()) {
-            val intent = Intent(this, PaymentActivity::class.java)
+             val intent = Intent(this, PaymentActivity::class.java)
             intent.putExtra(resources.getString(R.string.UserPayment), user)
             startActivity(intent)
-        } else {
-            val intent = Intent(this, CardPrimingActivity::class.java)
-            intent.putExtra(resources.getString(R.string.UserPayment), user)
-            startActivity(intent)
-        }
     }
 
     private fun requestListObservable() {
