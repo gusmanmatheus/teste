@@ -1,6 +1,5 @@
 package com.example.teste.features.contactsFeature
 
-import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.widget.EditText
@@ -60,9 +59,7 @@ class ContactsActivity : AppCompatActivity() {
     }
 
     private fun nextActivity(user: User) {
-             val intent = Intent(this, PaymentActivity::class.java)
-            intent.putExtra(resources.getString(R.string.UserPayment), user)
-            startActivity(intent)
+        PaymentActivity.startActivity(this,user)
     }
 
     private fun requestListObservable() {

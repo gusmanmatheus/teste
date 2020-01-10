@@ -1,5 +1,7 @@
 package com.example.teste.features.paymentFeature
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -30,8 +32,20 @@ class PaymentActivity : AppCompatActivity() {
         showNumberCard()
         setObservables()
         setClicks()
-        startActivity()
+        nextActivity()
     }
+    companion object{
+        private const val EXTRA_USER = "EXTRA_USER"
+        private fun newIntent(context: Context,user: User):Intent{
+            return Intent(context,PaymentActivity::class.java).apply{
+                putExtra(EXTRA_USER,user)
+            }
+        }
+            fun startActivity(activity: Activity, user: User){
+                activity.startActivity(newIntent(activity,user))
+
+            }
+        }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when {
@@ -51,7 +65,7 @@ class PaymentActivity : AppCompatActivity() {
 
     }
 
-    private fun startActivity() {
+    private fun nextActivity() {
         if (!paymentViewModel.verifyHasCard()) {
             paymentViewModel.user.value?.let {
                 RegisterCardActivity.startActivityForResult(this, it, null)
@@ -121,7 +135,7 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun recoveryUser() {
-        val user = intent.getSerializableExtra(resources.getString(R.string.UserPayment)) as User
+        val user = intent.getSerializableExtra(EXTRA_USER) as User
         paymentViewModel.setUser(user)
     }
 
