@@ -31,6 +31,8 @@ android {
 dependencies {
     def retrofitVersion = '2.5.0'
     def koinVersion = "2.0.1"
+    def archRoomVersion = '1.0.0-alpha3'
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -57,9 +59,11 @@ dependencies {
 
     //testing
     implementation 'org.koin:koin-test:2.0.1'
-    implementation "org.mockito:mockito-core:2.23.0"
+    implementation "org.mockito:mockito-core:2.25.0"
     implementation "androidx.arch.core:core-testing:2.1.0"
 
+    implementation "android.arch.persistence.room:runtime:$archRoomVersion"
+    kapt "android.arch.persistence.room:compiler:$archRoomVersion"
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
     testImplementation "io.mockk:mockk:1.9.3"
