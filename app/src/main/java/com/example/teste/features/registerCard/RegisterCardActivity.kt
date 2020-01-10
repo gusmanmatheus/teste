@@ -3,8 +3,11 @@ package com.example.teste.features.registerCard
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.EXTRA_USER
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -17,6 +20,10 @@ import com.example.teste.modules.Utils
 import com.example.teste.modules.changeText
 import com.example.teste.modules.verifyFieldHasVoids
 import kotlinx.android.synthetic.main.activity_register_card.*
+import kotlinx.android.synthetic.main.activity_register_card.view.*
+import kotlinx.android.synthetic.main.view_priming_card.*
+import kotlinx.android.synthetic.main.view_priming_card.view.*
+import kotlinx.android.synthetic.main.view_priming_card.view.registerACard
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -35,18 +42,25 @@ class RegisterCardActivity : AppCompatActivity() {
         controlVisibilityButton()
         observableFields()
         clickRegisterCard()
+        visibilityPrimingControl()
+    }
+    private fun visibilityPrimingControl( ) {
         val card = intent.getSerializableExtra(EXTRA_CARD) as? CreditCard
         if(card == null){
             primingView.isVisible = true
         }
+        goRegisterCard()
     }
-
-    companion object {
+    private fun goRegisterCard() {
+        registerACard.setOnClickListener {
+            primingView.isVisible = false
+        }
+    }
+        companion object {
         private const val REQUEST_REGISTER_CARD_CODE = 15000
         private const val EXTRA_CREDIT_CARD = "EXTRA_CREDIT_CARD"
         private const val EXTRA_USER = "EXTRA_USER"
         private const val EXTRA_CARD = "EXTRA_CARD"
-
 
         private fun newIntent(context: Context, user: User,creditCard: CreditCard?): Intent {
             return Intent(context, RegisterCardActivity()::class.java).apply {
@@ -71,7 +85,7 @@ class RegisterCardActivity : AppCompatActivity() {
                 data?.getSerializableExtra(EXTRA_CREDIT_CARD) as? CreditCard
             } else null
          }
-    }
+        }
 
     private fun recoveryUser() {
         val user = intent.getSerializableExtra(EXTRA_USER) as User
@@ -98,7 +112,7 @@ class RegisterCardActivity : AppCompatActivity() {
     }
 
     private fun controlVisibilityButton() {
-        paymentButton.isVisible = !EditText(this).verifyFieldHasVoids(
+        salveCard.isVisible = !EditText(this).verifyFieldHasVoids(
             holderNameEd,
             numberCardEd,
             cvvCardEd,
@@ -193,7 +207,7 @@ class RegisterCardActivity : AppCompatActivity() {
     }
 
     private fun clickRegisterCard() {
-        paymentButton.setOnClickListener {
+        salveCard.setOnClickListener {
             if (verifyCredCardValidate()) {
                 if (registerViewModel.saveCard()) {
                     registerViewModel.card.value?.let {

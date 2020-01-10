@@ -1,6 +1,5 @@
 package com.example.teste.features.paymentFeature
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -9,7 +8,6 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.teste.R
-import com.example.teste.data.model.CreditCard
 import com.example.teste.data.model.User
 import com.example.teste.databinding.ActivityPaymentBinding
 import com.example.teste.features.registerCard.RegisterCardActivity
