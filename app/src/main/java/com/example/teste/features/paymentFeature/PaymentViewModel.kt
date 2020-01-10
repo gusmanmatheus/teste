@@ -10,6 +10,8 @@ import com.example.teste.data.model.Payment
 import com.example.teste.data.model.PaymentResult
 import com.example.teste.data.model.User
 import com.example.teste.data.remote.LiveResources
+import com.example.teste.modules.Utils
+import com.example.teste.modules.Utils.cleanMoneyText
 
 class PaymentViewModel(private val repository: Repository) : ViewModel() {
     private var _user = MutableLiveData<User>()
@@ -44,10 +46,11 @@ class PaymentViewModel(private val repository: Repository) : ViewModel() {
 
     fun sendPayment() {
         this._creditCard.value?.let {
+            val values = cleanMoneyText(_valuePayment.value?:"").toString()
             val payment = Payment(
                 it.numberCard,
                 it.cvvCard,
-                _valuePayment.value ?: "0",
+                values,
                 it.expirationDate,
                 _user.value?.id?.toInt() ?: 0
             )

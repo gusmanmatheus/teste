@@ -36,6 +36,7 @@ class PaymentActivity : AppCompatActivity() {
         showNumberCard()
         setObservables()
         setClicks()
+        makePayment()
         nextActivity()
     }
     companion object{
