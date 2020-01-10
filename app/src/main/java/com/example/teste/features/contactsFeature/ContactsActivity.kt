@@ -36,6 +36,7 @@ class ContactsActivity : AppCompatActivity() {
         focusController()
         changeColorText()
         contactsViewModel.requestUsers()
+
     }
 
     private fun setBinding() {

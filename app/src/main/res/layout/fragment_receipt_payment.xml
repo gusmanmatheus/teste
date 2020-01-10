@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blackBackGround"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarReceipt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="@dimen/margin_small16"
+            android:background="@color/grayText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/photoUserReceipt"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="56dp"
+            android:src="@color/blackWeak"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarReceipt" />
+
+        <TextView
+            android:id="@+id/nameUserReceive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium24"
+            android:text="\@Zelda.Williams"
+            android:textColor="@color/white"
+            app:layout_constraintLeft_toLeftOf="@id/photoUserReceipt"
+            app:layout_constraintLeft_toRightOf="@id/photoUserReceipt"
+            app:layout_constraintTop_toBottomOf="@id/photoUserReceipt" />
+
+        <TextView
+            android:id="@+id/dataHour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small16"
+            android:text="\@Zelda.Williams"
+            android:textColor="@color/white"
+            app:layout_constraintLeft_toLeftOf="@id/photoUserReceipt"
+            app:layout_constraintLeft_toRightOf="@id/photoUserReceipt"
+            app:layout_constraintTop_toBottomOf="@id/nameUserReceive" />
+
+        <TextView
+            android:id="@+id/numberTransaction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small16"
+            android:text="\@Zelda.Williams"
+            android:textColor="@color/white"
+            app:layout_constraintLeft_toLeftOf="@id/photoUserReceipt"
+            app:layout_constraintLeft_toRightOf="@id/photoUserReceipt"
+            app:layout_constraintTop_toBottomOf="@id/dataHour" />
+
+        <View
+            android:id="@+id/viewOne"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="@dimen/margin_small16"
+            android:background="@color/grayText"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/numberTransaction" />
+
+        <TextView
+            android:id="@+id/masterCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_small16"
+            android:text="Cartão Master 1234"
+            android:textColor="@color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewOne" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_small16"
+            android:text="R$16,00"
+            android:textColor="@color/white"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewOne" />
+
+        <View
+            android:id="@+id/viewTwo"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="@dimen/margin_small16"
+            android:background="@color/grayText"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/masterCard" />
+
+        <TextView
+            android:id="@+id/masterCardx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_small16"
+            android:text="Total Pago"
+            android:textColor="@color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewTwo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_small16"
+            android:text="R$16,00"
+            android:textColor="@color/white"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewTwo" />
+
+        <Space
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewTwo" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
