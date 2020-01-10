@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
-            type="com.example.teste.features.registerCard.RegisterCardViewModel"/>
+            type="com.example.teste.features.registerCard.RegisterCardViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,7 +29,7 @@
             android:layout_marginStart="@dimen/margin_medium24"
             android:layout_marginLeft="@dimen/margin_medium24"
             android:text="@string/registerCard"
-            android:textColor="@color/whinte"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_big32"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +40,11 @@
             android:id="@+id/numberCardTl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small16"
+            android:layout_marginLeft="@dimen/margin_small16"
             android:layout_marginTop="@dimen/margin_small16"
+            android:layout_marginEnd="@dimen/margin_small16"
+            android:layout_marginRight="@dimen/margin_small16"
             android:textColorHint="@color/grayText"
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +70,11 @@
             android:id="@+id/holderNameTl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small16"
+            android:layout_marginLeft="@dimen/margin_small16"
             android:layout_marginTop="@dimen/margin_small16"
+            android:layout_marginEnd="@dimen/margin_small16"
+            android:layout_marginRight="@dimen/margin_small16"
             android:textColorHint="@color/grayText"
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
@@ -93,6 +102,10 @@
             android:id="@+id/expirationDateTl"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small16"
+            android:layout_marginLeft="@dimen/margin_small16"
+            android:layout_marginEnd="@dimen/margin_small16"
+            android:layout_marginRight="@dimen/margin_small16"
             android:inputType="number"
             android:textColorHint="@color/grayText"
             app:errorEnabled="true"
@@ -109,8 +122,8 @@
                 android:hint="@string/expirationDateHint"
                 android:imeOptions="actionNext"
                 android:inputType="numberDecimal"
-                android:maxLines="1"
                 android:maxLength="5"
+                android:maxLines="1"
                 android:text="@={viewModel.card.expirationDate}"
                 android:textColor="@color/grayText"
                 android:textColorHint="@color/colorPrimary"
@@ -122,8 +135,12 @@
             android:id="@+id/cvvCardTl"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small16"
+            android:layout_marginLeft="@dimen/margin_small16"
+            android:layout_marginEnd="@dimen/margin_small16"
+            android:layout_marginRight="@dimen/margin_small16"
             android:inputType="number"
-             android:textColorHint="@color/grayText"
+            android:textColorHint="@color/grayText"
             app:errorEnabled="true"
             app:layout_constraintLeft_toRightOf="@id/expirationDateTl"
             app:layout_constraintRight_toRightOf="parent"
@@ -146,21 +163,33 @@
 
 
         <Button
-            android:id="@+id/RegisterCard"
+            android:id="@+id/salveCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Salvar"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
             android:layout_margin="@dimen/margin_small16"
             android:layout_marginBottom="@dimen/margin_small16"
             android:background="@drawable/standard_button"
-            android:textColor="@color/whinte"
+            android:text="Salvar"
+            android:textColor="@color/white"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             tools:visibility="visible" />
+
+        <include
+            android:id="@+id/primingView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            layout="@layout/view_priming_card"
+             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbarRegister"
+            android:visibility="gone"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -13,8 +13,8 @@ class Resources<T> private constructor(
             return Resources(StatusRequest.SUCCES, data)
         }
 
-        fun  <T>errorResponse(error: String?): Resources<T> {
-            return Resources(StatusRequest.ERROR, error = error )
+        fun <T> errorResponse(error: String?): Resources<T> {
+            return Resources(StatusRequest.ERROR, error = error)
         }
 
         fun <T> loading(): Resources<T> {

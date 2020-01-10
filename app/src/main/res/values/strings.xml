@@ -8,10 +8,11 @@
         precisa cadastrar um\ncartão de cédito pessoal.</string>
     <string name="registerCard">Cadastrar cartão</string>
     <string name="UserPayment">UserPayment</string>
-
+    <string name="cardPayment">CardPayment</string>
     <string name="cvvHint">CVV</string>
     <string name="numberCardHint">Número do cartão</string>
     <string name="holderNameHint">Nome titular</string>
     <string name="expirationDateHint">Vencimento</string>
-
+    <string name="ball">" •"</string>
+    <string name="masterCard">MasterCard</string>
 </resources>

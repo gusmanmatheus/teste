@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/blackBackGround"
-        tools:context=".features.primingCard.CardPriming">
+        tools:context=".features.primingCard.CardPrimingActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -32,9 +32,9 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/registerACardText"
-            android:textColor="@color/whinte"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_big32"
-            app:layout_constraintBottom_toTopOf="@id/registerCard"
+            app:layout_constraintBottom_toTopOf="@id/registerACard"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
@@ -47,19 +47,19 @@
             android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="@string/explanationRegisterACardText"
-            android:textColor="@color/whinte"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_small16"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/registerCardText" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/registerCard"
+            android:id="@+id/registerACard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_small16"
             android:text="@string/registerCard"
-            android:textColor="@color/whinte"
+            android:textColor="@color/white"
             android:background="@drawable/standard_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

@@ -34,7 +34,7 @@
             android:layout_marginStart="@dimen/margin_medium24"
             android:layout_marginLeft="@dimen/margin_medium24"
             android:text="@{user.name}"
-            android:textColor="@color/whinte"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_medium24"
             app:layout_constraintStart_toEndOf="@id/photoUser"
             app:layout_constraintTop_toTopOf="parent"

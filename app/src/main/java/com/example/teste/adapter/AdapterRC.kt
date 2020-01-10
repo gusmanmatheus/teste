@@ -22,7 +22,6 @@ class AdapterRC : RecyclerView.Adapter<AdapterRC.ViewHolder>(), Filterable {
                 listFilted = results?.values as MutableList<User>
                 notifyDataSetChanged()
             }
-
         }
     }
 
@@ -79,7 +78,6 @@ class AdapterRC : RecyclerView.Adapter<AdapterRC.ViewHolder>(), Filterable {
             }
             listFilter
         }
-
         return listFilted
     }
 }
