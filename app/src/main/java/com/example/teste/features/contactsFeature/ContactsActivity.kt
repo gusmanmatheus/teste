@@ -60,7 +60,7 @@ class ContactsActivity : AppCompatActivity() {
     }
 
     private fun nextActivity(user: User) {
-        PaymentActivity.startActivity(this,user)
+        PaymentActivity.startActivity(this, user)
     }
 
     private fun requestListObservable() {

@@ -19,10 +19,11 @@
 
         <ImageView
             android:id="@+id/photoUser"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
+            android:layout_width="@dimen/margin_exBig64"
+            android:layout_height="@dimen/margin_exBig64"
             app:imageUrl="@{user.image}"
             android:layout_marginLeft="@dimen/margin_small16"
+            android:layout_marginStart="@dimen/margin_small16"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:src="@mipmap/ic_launcher" />
@@ -47,7 +48,7 @@
             android:layout_marginLeft="@dimen/text_medium24"
             android:text="@{user.username}"
             android:textColor="@color/grayText"
-            android:textSize="16sp"
+            android:textSize="@dimen/text_small16"
             app:layout_constraintStart_toEndOf="@id/photoUser"
             app:layout_constraintTop_toBottomOf="@id/nameUser"
             tools:text="username" />

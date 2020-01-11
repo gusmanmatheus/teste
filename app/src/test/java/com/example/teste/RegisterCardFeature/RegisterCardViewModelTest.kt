@@ -1,16 +1,18 @@
 package com.example.teste.RegisterCardFeature
 
 import com.example.teste.InstantExecutorExtension
+import com.example.teste.data.Repository
 import com.example.teste.features.registerCard.RegisterCardViewModel
- import org.junit.Assert.assertFalse
+import io.mockk.mockk
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
 @ExtendWith(InstantExecutorExtension::class)
 class RegisterCardViewModelTest {
-
-    private val viewModel: RegisterCardViewModel = RegisterCardViewModel()
+    private val repository : Repository = mockk(relaxed =true)
+    private val viewModel: RegisterCardViewModel = RegisterCardViewModel(repository)
 
 
     @Test
@@ -86,5 +88,4 @@ class RegisterCardViewModelTest {
         val verify = viewModel.verifyNumeberCharacterCvv("1234")
         assertFalse(verify)
     }
-
 }

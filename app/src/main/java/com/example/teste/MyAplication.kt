@@ -8,7 +8,7 @@ import org.koin.core.context.startKoin
 
 class MyAplication : Application() {
     private val modules = listOf(
-        contactsModule, registerCardModule, paymentModule, repositoryData, primingModule
+        contactsModule, registerCardModule, paymentModule, repositoryData
     )
 
     override fun onCreate() {

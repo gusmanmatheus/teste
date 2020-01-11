@@ -1,16 +1,11 @@
 package com.example.teste.modules
 
-import androidx.databinding.DataBindingUtil.setContentView
 import androidx.room.Room
 import com.example.teste.adapter.AdapterRC
-import com.example.teste.features.contactsFeature.ContactsActivity
 import com.example.teste.features.contactsFeature.ContactsViewModel
 import com.example.teste.data.Repository
 import com.example.teste.data.dao.AppDataBase
-import com.example.teste.data.model.User
 import com.example.teste.data.remote.RemoteDataSource
-import com.example.teste.databinding.ActivityContactsBinding
-import com.example.teste.features.paymentFeature.CardPrimingViewModel
 import com.example.teste.features.paymentFeature.PaymentViewModel
 import com.example.teste.features.registerCard.RegisterCardViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -43,9 +38,6 @@ val repositoryData = module {
 
 val registerCardModule = module {
     viewModel { RegisterCardViewModel(get()) }
-}
-val primingModule = module {
-    viewModel { CardPrimingViewModel() }
 }
 
 val paymentModule = module {

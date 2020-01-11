@@ -135,26 +135,26 @@ class RegisterCardActivity : AppCompatActivity() {
             removeMaskNumberCard ?: ""
         )
         if (!approvedCvv) {
-            binding.cvvCardTl.error = "cvv invalido"
+            binding.cvvCardTl.error = resources.getString(R.string.cvvInformation)
             binding.cvvCardTl.isErrorEnabled = true
         } else {
             binding.cvvCardTl.isErrorEnabled = false
         }
         if (!approvedName) {
             binding.holderNameTl.isErrorEnabled = true
-            binding.holderNameTl.error = "name errado"
+            binding.holderNameTl.error = resources.getString(R.string.nameInformation)
         } else {
             binding.holderNameTl.isErrorEnabled = false
         }
         if (!approvedNumber) {
             binding.numberCardTl.isErrorEnabled = true
-            binding.numberCardTl.error = "numero errado"
+            binding.numberCardTl.error = resources.getString(R.string.numberCardInformation)
         } else {
             binding.numberCardTl.isErrorEnabled = false
         }
         if (!approvedDate) {
             binding.expirationDateTl.isErrorEnabled = true
-            binding.expirationDateTl.error = "data errada"
+            binding.expirationDateTl.error = resources.getString(R.string.dateInformation)
         } else {
             binding.expirationDateTl.isErrorEnabled = false
         }

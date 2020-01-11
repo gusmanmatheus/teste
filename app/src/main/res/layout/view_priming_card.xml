@@ -44,7 +44,7 @@
             android:id="@+id/explanation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/mini_small8"
             android:gravity="center"
             android:text="@string/explanationRegisterACardText"
             android:textColor="@color/white"

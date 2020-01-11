@@ -7,6 +7,8 @@ import com.example.teste.data.Repository
 import com.example.teste.data.model.*
 import com.example.teste.data.remote.LiveResources
 import com.example.teste.modules.Utils.cleanMoneyText
+import java.util.*
+import java.text.SimpleDateFormat
 
 
 class PaymentViewModel(private val repository: Repository) : ViewModel() {
@@ -64,7 +66,7 @@ class PaymentViewModel(private val repository: Repository) : ViewModel() {
         return Receipt(
             _user.value?.username ?: "",
             _user.value?.image ?: "",
-            "00",
+            date(),
             "Transação: "+paymentResult.value?.data?.transaction?.id,
             "Cartão Master "+_creditCard.value?.numberCard?.substring(
                 lengthNumCard - 4,
@@ -73,7 +75,11 @@ class PaymentViewModel(private val repository: Repository) : ViewModel() {
             valuePayment.value.toString()
         )
     }
-//    fun dat
+    private fun date():String{
+        val dateHour = Date()
+          return  SimpleDateFormat("dd/MM/yyyy HH:mm", Locale("BR")).format(dateHour).replace(" "," ás ")
+
+    }
 }
 
 
