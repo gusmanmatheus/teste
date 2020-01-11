@@ -10,7 +10,7 @@ import java.util.*
 object Utils {
     fun maskDate(date: String?): String {
         date?.let {
-            val dateAux: String = it.replace("/", "")
+            val dateAux: String = it.replace("/", "").replace(".","")
             return when {
                 dateAux.length == 1 -> "${dateAux[0]}"
                 dateAux.length == 2 -> "${dateAux[0]}${dateAux[1]}"
