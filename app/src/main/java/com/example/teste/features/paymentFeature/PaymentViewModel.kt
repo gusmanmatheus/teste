@@ -67,17 +67,19 @@ class PaymentViewModel(private val repository: Repository) : ViewModel() {
             _user.value?.username ?: "",
             _user.value?.image ?: "",
             date(),
-            "Transação: "+paymentResult.value?.data?.transaction?.id,
-            "Cartão Master "+_creditCard.value?.numberCard?.substring(
+            "Transação: " + paymentResult.value?.data?.transaction?.id,
+            "Cartão Master " + _creditCard.value?.numberCard?.substring(
                 lengthNumCard - 4,
                 lengthNumCard - 1
             ),
             valuePayment.value.toString()
         )
     }
-    private fun date():String{
+
+    private fun date(): String {
         val dateHour = Date()
-          return  SimpleDateFormat("dd/MM/yyyy HH:mm", Locale("BR")).format(dateHour).replace(" "," ás ")
+        return SimpleDateFormat("dd/MM/yyyy HH:mm", Locale("BR")).format(dateHour)
+            .replace(" ", " ás ")
 
     }
 }
