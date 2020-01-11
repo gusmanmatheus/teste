@@ -47,14 +47,15 @@ class UtilsTest {
     }
 
     @Test
-    fun `unMaskMoney`(){
+    fun `unMaskMoney`() {
         val value = "111.111,00"
         val unmask = Utils.cleanMoneyText(value).toString()
         Assert.assertEquals(unmask, "111111.0")
 
     }
+
     @Test
-    fun `unMaskMoneySecond`(){
+    fun `unMaskMoneySecond`() {
         val value = "111,00"
         val unmask = Utils.cleanMoneyText(value).toString()
         Assert.assertEquals(unmask, "111.0")

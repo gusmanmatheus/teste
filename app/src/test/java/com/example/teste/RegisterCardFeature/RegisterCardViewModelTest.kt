@@ -11,7 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 
 @ExtendWith(InstantExecutorExtension::class)
 class RegisterCardViewModelTest {
-    private val repository : Repository = mockk(relaxed =true)
+    private val repository: Repository = mockk(relaxed = true)
     private val viewModel: RegisterCardViewModel = RegisterCardViewModel(repository)
 
 
