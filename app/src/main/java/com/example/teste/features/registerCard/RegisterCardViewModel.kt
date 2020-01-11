@@ -42,6 +42,7 @@ class RegisterCardViewModel(private val repository: Repository) : ViewModel() {
     }
 
     fun saveCard(): Boolean {
+        _card.value?.numberCard = _card.value?.numberCard?.replace(" ","") ?: _card.value?.numberCard.toString()
         val newCard = repository.getCardDb()
         if (newCard.isNotEmpty()) {
             card.value?.let {

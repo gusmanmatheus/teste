@@ -1,5 +1,6 @@
 package com.example.teste.adapter
 
+import android.icu.text.SimpleDateFormat
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
@@ -10,6 +11,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.teste.modules.Utils
 import com.example.teste.modules.Utils.maskDate
 import com.google.android.material.textfield.TextInputEditText
+import java.util.*
 
 
 object BindingAdapters {
@@ -29,4 +31,5 @@ object BindingAdapters {
     fun setBindLoading(view: View, isVisible: Boolean) {
         view.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
+
 }

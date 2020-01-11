@@ -1,6 +1,7 @@
 package com.example.teste.features.paymentFeature
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -93,6 +94,7 @@ class PaymentActivity : AppCompatActivity() {
             if (it != "") {
                 val value = it.replace(",", ".").replace(".", "").toDouble()
                 changeColorTextValuePayment(value > 0.0)
+
             }
         })
     }
@@ -118,16 +120,22 @@ class PaymentActivity : AppCompatActivity() {
                     Resources.StatusRequest.SUCCES -> {
                         paymentButton.isClickable = true
                         it.data?.let { data ->
-                            val receipt = ReceiptPayment( )
-                            receipt.show(supportFragmentManager, receipt.tag)
-                            Log.i("xrl8", data.toString() + "XD")
+                                Log.i("xrl8",data.toString())
+                                Log.i("xrl8",paymentViewModel.creditCard.value.toString())
+                                if(data.transaction.status == "Aprovada"){
+                                    showReceiptPayment()
+                                }else{
+                                    popUpErro("Verifique seu cartão, só cartao com numero" +
+                                            " 1111111111111111 aprova a transação")
+                                }
+                            }
                         }
-                    }
+
                     Resources.StatusRequest.ERROR -> {
                         paymentButton.isClickable = true
-                        it.error?.let { error ->
-                            Log.i("xrl8", error.toString() + "XD")
-                        }
+                        it.error?.let { _->
+                            popUpErro("verifique sua internet")
+                         }
 
                     }
                     Resources.StatusRequest.LOADING -> {
@@ -136,6 +144,19 @@ class PaymentActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+    private fun popUpErro(message:String){
+        val  alertDialog = AlertDialog.Builder(this)
+        alertDialog.setTitle("Erro ao Pagar")
+        alertDialog.setMessage(message)
+        alertDialog.setPositiveButton("Ok") { _, _ ->
+        }
+        alertDialog.show()
+    }
+    private fun showReceiptPayment(){
+        val receipt = ReceiptPayment(paymentViewModel.createReceipt())
+        receipt.show(supportFragmentManager, receipt.tag)
+
     }
 
     private fun changeColorTextValuePayment(condition: Boolean) {
@@ -147,6 +168,12 @@ class PaymentActivity : AppCompatActivity() {
                     null
                 )
             )
+            paymentButton.background =   ResourcesCompat.getDrawable(
+                resources,
+                R.drawable.standard_button,
+                null
+            )
+            paymentButton.isClickable = true
         } else {
             valuePayment.setTextColor(
                 ResourcesCompat.getColor(
@@ -155,6 +182,12 @@ class PaymentActivity : AppCompatActivity() {
                     null
                 )
             )
+            paymentButton.background =   ResourcesCompat.getDrawable(
+                resources,
+                R.drawable.gray_button,
+                null
+            )
+            paymentButton.isClickable = false
         }
     }
 

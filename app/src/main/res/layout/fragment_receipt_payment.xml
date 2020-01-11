@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="receipt"
+            type="com.example.teste.data.model.Receipt" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,6 +17,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarReceipt"
+            android:background="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -23,7 +26,7 @@
 
         <View
             android:layout_width="30dp"
-            android:layout_height="2dp"
+            android:layout_height="3dp"
             android:layout_marginTop="@dimen/margin_small16"
             android:background="@color/grayText"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +38,8 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="56dp"
-            android:src="@color/blackWeak"
+            tools:src="@color/blackWeak"
+            imageUrl="@{receipt.photoUser}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +50,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_medium24"
-            android:text="\@Zelda.Williams"
+            tools:text="\@Zelda.Williams"
+            android:text="@{receipt.userName}"
             android:textColor="@color/white"
             app:layout_constraintLeft_toLeftOf="@id/photoUserReceipt"
             app:layout_constraintLeft_toRightOf="@id/photoUserReceipt"
@@ -57,7 +62,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small16"
-            android:text="\@Zelda.Williams"
+            tools:text="15/12/2022 ás 16:36"
+            android:text="@{receipt.date}"
             android:textColor="@color/white"
             app:layout_constraintLeft_toLeftOf="@id/photoUserReceipt"
             app:layout_constraintLeft_toRightOf="@id/photoUserReceipt"
@@ -68,7 +74,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small16"
-            android:text="\@Zelda.Williams"
+            tools:text="230010"
+            android:text="@{receipt.transaction}"
             android:textColor="@color/white"
             app:layout_constraintLeft_toLeftOf="@id/photoUserReceipt"
             app:layout_constraintLeft_toRightOf="@id/photoUserReceipt"
@@ -89,7 +96,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_small16"
-            android:text="Cartão Master 1234"
+            tools:text="Cartão Master 1234"
+            android:text="@{receipt.numberCard}"
             android:textColor="@color/white"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/viewOne" />
@@ -98,7 +106,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_small16"
-            android:text="R$16,00"
+            tools:text="R$16,00"
+            android:text="@{receipt.value}"
             android:textColor="@color/white"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/viewOne" />
@@ -127,7 +136,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_small16"
-            android:text="R$16,00"
+            tools:text="R$16,00"
+            android:text="@{receipt.value}"
             android:textColor="@color/white"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/viewTwo" />
