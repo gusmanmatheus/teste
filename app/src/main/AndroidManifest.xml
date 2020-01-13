@@ -14,12 +14,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppNoTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".features.paymentFeature.PaymentActivity"
-            android:windowSoftInputMode="adjustResize"></activity>
-        <activity android:name=".features.registerCard.RegisterCardActivity"
-            android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".features.primingCard.CardPrimingActivity" />
-        <activity android:name=".features.contactsFeature.ContactsActivity">
+        <activity
+            android:name=".features.paymentFeature.PaymentActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".features.registerCard.RegisterCardActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".features.contactsFeature.ContactsActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
