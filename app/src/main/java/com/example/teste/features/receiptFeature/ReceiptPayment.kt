@@ -29,8 +29,7 @@ class ReceiptPayment(private val receipt: Receipt) : BottomSheetDialogFragment()
 
     override fun onDestroy() {
         super.onDestroy()
-        Toast.makeText(context, "closed", Toast.LENGTH_LONG).show()
-        activity?.finish()
+         activity?.finish()
 
     }
 }

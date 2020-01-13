@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.teste.features.paymentFeature.PaymentViewModel" />
@@ -24,53 +25,55 @@
 
         <ImageView
             android:id="@+id/userPhoto"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginTop="32dp"
+            imageUrl="@{viewModel.user.image}"
+            android:layout_width="@dimen/margin_exBig64"
+            android:layout_height="@dimen/margin_exBig64"
+            android:layout_marginTop="@dimen/margin_small16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbarPayment"
-            imageUrl="@{viewModel.user.image}"
             tools:src="@mipmap/ic_launcher" />
 
         <TextView
             android:id="@+id/nickNameUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/mini_small8"
+            android:text="@{viewModel.user.username}"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/userPhoto"
-            android:text="@{viewModel.user.username}"
             tools:text="\@zelda.williams" />
 
 
         <EditText
             android:id="@+id/valuePayment"
-            android:layout_width="100dp"
+            android:layout_width="@dimen/size150"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginStart="@dimen/margin_medium24"
+            android:layout_marginLeft="@dimen/margin_medium24"
+            android:layout_marginTop="@dimen/margin_big32"
             android:inputType="numberDecimal"
             android:maxLines="1"
             android:text="@{viewModel._valuePayment}"
-            tools:text="0,00"
             android:textColor="@color/grayText"
             android:textSize="@dimen/text_big42"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nickNameUser" />
+            app:layout_constraintTop_toBottomOf="@+id/nickNameUser"
+            tools:text="@string/toolsZeroValuePayment" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/symbolReal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_small16"
             android:layout_marginRight="@dimen/margin_small16"
-            android:text="R$"
+            android:text="@string/realSymbol"
             android:textColor="@color/white"
             android:textSize="@dimen/text_small16"
             app:layout_constraintBottom_toBottomOf="@+id/valuePayment"
@@ -81,9 +84,9 @@
             android:id="@+id/masterCard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_medium24"
-            android:layout_marginRight="@dimen/margin_medium24"
-            android:text="MasterCard"
+            android:layout_marginEnd="@dimen/mini_small8"
+            android:layout_marginRight="@dimen/mini_small8"
+            android:text="@string/mastercard"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/editCard"
             app:layout_constraintEnd_toStartOf="@+id/editCard"
@@ -94,13 +97,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_medium24"
-            android:layout_marginEnd="@dimen/margin_medium24"
-            android:layout_marginRight="@dimen/margin_medium24"
+            android:layout_marginEnd="@dimen/margin_big32"
+            android:layout_marginRight="@dimen/margin_big32"
             android:background="@color/transparentColor"
-            android:text="Editar"
+            android:text="@string/editCard"
             android:textColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView3"
+            app:layout_constraintStart_toStartOf="@+id/userPhoto"
             app:layout_constraintTop_toBottomOf="@+id/valuePayment" />
 
         <Button
@@ -111,8 +114,8 @@
             android:layout_gravity="center"
             android:layout_margin="@dimen/margin_small16"
             android:layout_marginBottom="@dimen/margin_small16"
-            android:background="@drawable/standard_button"
-            android:text="Pagar"
+            android:background="@drawable/gray_button"
+            android:text="@string/paymentButtonText"
             android:textColor="@color/white"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"

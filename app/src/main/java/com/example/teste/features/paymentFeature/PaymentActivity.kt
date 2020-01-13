@@ -120,22 +120,19 @@ class PaymentActivity : AppCompatActivity() {
                     Resources.StatusRequest.SUCCES -> {
                         paymentButton.isClickable = true
                         it.data?.let { data ->
-                                Log.i("xrl8",data.toString())
-                                Log.i("xrl8",paymentViewModel.creditCard.value.toString())
-                                if(data.transaction.status == "Aprovada"){
-                                    showReceiptPayment()
-                                }else{
-                                    popUpErro("Verifique seu cartão, só cartao com numero" +
-                                            " 1111111111111111 aprova a transação")
-                                }
+                            if (data.transaction.status == "Aprovada") {
+                                showReceiptPayment()
+                            } else {
+                                popUpErro(resources.getString(R.string.invalidateCard))
                             }
                         }
+                    }
 
                     Resources.StatusRequest.ERROR -> {
                         paymentButton.isClickable = true
-                        it.error?.let { _->
-                            popUpErro("verifique sua internet")
-                         }
+                        it.error?.let { _ ->
+                            popUpErro(resources.getString(R.string.verifyNet))
+                        }
 
                     }
                     Resources.StatusRequest.LOADING -> {
@@ -145,15 +142,17 @@ class PaymentActivity : AppCompatActivity() {
             }
         })
     }
-    private fun popUpErro(message:String){
-        val  alertDialog = AlertDialog.Builder(this)
-        alertDialog.setTitle("Erro ao Pagar")
+
+    private fun popUpErro(message: String) {
+        val alertDialog = AlertDialog.Builder(this)
+        alertDialog.setTitle(resources.getString(R.string.errorPayment))
         alertDialog.setMessage(message)
         alertDialog.setPositiveButton("Ok") { _, _ ->
         }
         alertDialog.show()
     }
-    private fun showReceiptPayment(){
+
+    private fun showReceiptPayment() {
         val receipt = ReceiptPayment(paymentViewModel.createReceipt())
         receipt.show(supportFragmentManager, receipt.tag)
 
@@ -168,7 +167,7 @@ class PaymentActivity : AppCompatActivity() {
                     null
                 )
             )
-            paymentButton.background =   ResourcesCompat.getDrawable(
+            paymentButton.background = ResourcesCompat.getDrawable(
                 resources,
                 R.drawable.standard_button,
                 null
@@ -182,7 +181,7 @@ class PaymentActivity : AppCompatActivity() {
                     null
                 )
             )
-            paymentButton.background =   ResourcesCompat.getDrawable(
+            paymentButton.background = ResourcesCompat.getDrawable(
                 resources,
                 R.drawable.gray_button,
                 null

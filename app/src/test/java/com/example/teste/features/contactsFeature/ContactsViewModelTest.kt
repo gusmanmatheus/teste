@@ -1,7 +1,7 @@
 package com.example.teste.features.contactsFeature
 
 import com.example.teste.InstantExecutorExtension
- import com.example.teste.data.Repository
+import com.example.teste.data.Repository
 import io.mockk.clearAllMocks
 import io.mockk.every
 import io.mockk.junit5.MockKExtension

@@ -15,4 +15,24 @@
     <string name="expirationDateHint">Vencimento</string>
     <string name="ball">" •"</string>
     <string name="masterCard">MasterCard</string>
+    <string name="invalidateCard">Verifique seu cartão, só cartao com numero 1111111111111111 aprova a transação</string>
+    <string name="verifyNet">verifique sua interne</string>
+    <string name="errorPayment">Erro ao Pagar</string>
+    <string name="cvvInformation">cvv deve ter 3 numeros.</string>
+    <string name="nameInformation">nome não pode ter numeros.</string>
+    <string name="numberCardInformation">deve digitar os 16 digitos.</string>
+    <string name="dateInformation">data deve ter padrao mes/ano.</string>
+    <string name="paymentButtonText">Pagar</string>
+    <string name="mastercard">MasterCard</string>
+    <string name="realSymbol">R$</string>
+    <string name="editCard">Editar</string>
+    <string name="receiptText">Recibo</string>
+    <string name="toolsMasterCard">Cartão Master 1234</string>
+    <string name="toolsValue">R$16,00</string>
+    <string name="total_payed">Total Pago</string>
+    <string name="toolsCodeTransaction">230010</string>
+    <string name="toolsDate">15/12/2022 ás 16:36</string>
+    <string name="toolsUsername">\@Zelda.Williams</string>
+    <string name="toolsZeroValuePayment">0,00</string>
+
 </resources>

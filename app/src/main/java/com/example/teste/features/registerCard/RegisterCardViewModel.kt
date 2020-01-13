@@ -30,7 +30,7 @@ class RegisterCardViewModel(private val repository: Repository) : ViewModel() {
         val dates = date.split("/")
         if (dates.size >= 2) {
             return dates[0].toInt() in 1..12
-                    && dates[1].toInt() > 20
+                    && dates[1].toInt() >= 20
         }
         return false
     }
