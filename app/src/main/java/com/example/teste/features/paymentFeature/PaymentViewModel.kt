@@ -69,8 +69,8 @@ class PaymentViewModel(private val repository: Repository) : ViewModel() {
             date(),
             "Transação: " + paymentResult.value?.data?.transaction?.id,
             "Cartão Master " + _creditCard.value?.numberCard?.substring(
-                lengthNumCard - 4,
-                lengthNumCard - 1
+                lengthNumCard - 3,
+                lengthNumCard
             ),
             valuePayment.value.toString()
         )

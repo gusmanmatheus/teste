@@ -17,7 +17,9 @@ class RegisterCardViewModel(private val repository: Repository) : ViewModel() {
     fun userRecovery(user: User) {
         this.user = user
     }
-
+    fun creditCardRecovery(creditCard: CreditCard){
+        this._card.value = creditCard
+    }
     init {
         _card.value = (CreditCard(1, "", "", "", ""))
     }

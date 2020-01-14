@@ -49,8 +49,10 @@ class RegisterCardActivity : AppCompatActivity() {
         val card = intent.getSerializableExtra(EXTRA_CARD) as? CreditCard
         if (card == null) {
             primingView.isVisible = true
+            goRegisterCard()
+        }else{
+            registerViewModel.creditCardRecovery(card)
         }
-        goRegisterCard()
     }
 
     private fun goRegisterCard() {
