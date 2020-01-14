@@ -201,8 +201,8 @@ class PaymentActivity : AppCompatActivity() {
         var ballValue =
             resources.getString(R.string.masterCard) + " " + resources.getString(R.string.ball)
         ballValue += " " + paymentViewModel.creditCard.value?.numberCard?.substring(
-            lengthNumerCard - 4,
-            lengthNumerCard - 1
+            lengthNumerCard - 3 ,
+            lengthNumerCard
         )
         masterCard.text = ballValue
     }
