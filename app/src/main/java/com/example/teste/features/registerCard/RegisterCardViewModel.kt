@@ -1,6 +1,5 @@
 package com.example.teste.features.registerCard
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,7 +7,6 @@ import com.example.teste.data.Repository
 import com.example.teste.data.model.CreditCard
 import com.example.teste.data.model.User
 import com.example.teste.modules.containsNumber
-import com.example.teste.modules.repositoryData
 
 class RegisterCardViewModel(private val repository: Repository) : ViewModel() {
 
@@ -19,9 +17,11 @@ class RegisterCardViewModel(private val repository: Repository) : ViewModel() {
     fun userRecovery(user: User) {
         this.user = user
     }
-
+    fun creditCardRecovery(creditCard: CreditCard){
+        this._card.value = creditCard
+    }
     init {
-        _card.postValue(CreditCard(1, "", "", "", ""))
+        _card.value = (CreditCard(1, "", "", "", ""))
     }
 
     fun verifyNumeberCharacterCvv(cvv: String) = cvv.length == 3
@@ -30,7 +30,7 @@ class RegisterCardViewModel(private val repository: Repository) : ViewModel() {
         val dates = date.split("/")
         if (dates.size >= 2) {
             return dates[0].toInt() in 1..12
-                    && dates[1].toInt() > 20
+                    && dates[1].toInt() >= 20
         }
         return false
     }
@@ -42,11 +42,13 @@ class RegisterCardViewModel(private val repository: Repository) : ViewModel() {
     }
 
     fun saveCard(): Boolean {
+        _card.value?.numberCard =
+            _card.value?.numberCard?.replace(" ", "") ?: _card.value?.numberCard.toString()
         val newCard = repository.getCardDb()
         if (newCard.isNotEmpty()) {
             card.value?.let {
                 val cardAtt = it
-                 repository.attCard(cardAtt)
+                repository.attCard(cardAtt)
                 return true
             } ?: run { return false }
         } else {

@@ -44,35 +44,41 @@ class RegisterCardActivity : AppCompatActivity() {
         clickRegisterCard()
         visibilityPrimingControl()
     }
-    private fun visibilityPrimingControl( ) {
+
+    private fun visibilityPrimingControl() {
         val card = intent.getSerializableExtra(EXTRA_CARD) as? CreditCard
-        if(card == null){
+        if (card == null) {
             primingView.isVisible = true
+            goRegisterCard()
+        }else{
+            registerViewModel.creditCardRecovery(card)
         }
-        goRegisterCard()
     }
+
     private fun goRegisterCard() {
         registerACard.setOnClickListener {
             primingView.isVisible = false
         }
     }
-        companion object {
+
+    companion object {
         private const val REQUEST_REGISTER_CARD_CODE = 15000
         private const val EXTRA_CREDIT_CARD = "EXTRA_CREDIT_CARD"
         private const val EXTRA_USER = "EXTRA_USER"
         private const val EXTRA_CARD = "EXTRA_CARD"
 
-        private fun newIntent(context: Context, user: User,creditCard: CreditCard?): Intent {
+        private fun newIntent(context: Context, user: User, creditCard: CreditCard?): Intent {
             return Intent(context, RegisterCardActivity()::class.java).apply {
                 putExtra(EXTRA_USER, user)
-                putExtra(EXTRA_CARD,creditCard)
+                putExtra(EXTRA_CARD, creditCard)
             }
         }
 
-        fun startActivityForResult(activity: Activity, user: User,creditCard: CreditCard?) {
+        fun startActivityForResult(activity: Activity, user: User, creditCard: CreditCard?) {
             activity.startActivityForResult(
-                newIntent(activity, user,creditCard),
-                REQUEST_REGISTER_CARD_CODE)
+                newIntent(activity, user, creditCard),
+                REQUEST_REGISTER_CARD_CODE
+            )
 
         }
 
@@ -84,8 +90,8 @@ class RegisterCardActivity : AppCompatActivity() {
             return if (resultCode == Activity.RESULT_OK) {
                 data?.getSerializableExtra(EXTRA_CREDIT_CARD) as? CreditCard
             } else null
-         }
         }
+    }
 
     private fun recoveryUser() {
         val user = intent.getSerializableExtra(EXTRA_USER) as User
@@ -135,26 +141,26 @@ class RegisterCardActivity : AppCompatActivity() {
             removeMaskNumberCard ?: ""
         )
         if (!approvedCvv) {
-            binding.cvvCardTl.error = "cvv invalido"
+            binding.cvvCardTl.error = resources.getString(R.string.cvvInformation)
             binding.cvvCardTl.isErrorEnabled = true
         } else {
             binding.cvvCardTl.isErrorEnabled = false
         }
         if (!approvedName) {
             binding.holderNameTl.isErrorEnabled = true
-            binding.holderNameTl.error = "name errado"
+            binding.holderNameTl.error = resources.getString(R.string.nameInformation)
         } else {
             binding.holderNameTl.isErrorEnabled = false
         }
         if (!approvedNumber) {
             binding.numberCardTl.isErrorEnabled = true
-            binding.numberCardTl.error = "numero errado"
+            binding.numberCardTl.error = resources.getString(R.string.numberCardInformation)
         } else {
             binding.numberCardTl.isErrorEnabled = false
         }
         if (!approvedDate) {
             binding.expirationDateTl.isErrorEnabled = true
-            binding.expirationDateTl.error = "data errada"
+            binding.expirationDateTl.error = resources.getString(R.string.dateInformation)
         } else {
             binding.expirationDateTl.isErrorEnabled = false
         }
@@ -208,11 +214,10 @@ class RegisterCardActivity : AppCompatActivity() {
 
     private fun clickRegisterCard() {
         salveCard.setOnClickListener {
-            if (verifyCredCardValidate()) {
-                if (registerViewModel.saveCard()) {
-                    registerViewModel.card.value?.let {
-                        finishWithResult(it)
-                    }
+            if (verifyCredCardValidate() && registerViewModel.saveCard()) {
+                registerViewModel.card.value?.let {
+                    finishWithResult(it)
+
                 }
             }
         }

@@ -1,6 +1,7 @@
 package com.example.teste.features.paymentFeature
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -16,6 +17,7 @@ import com.example.teste.data.model.CreditCard
 import com.example.teste.data.model.User
 import com.example.teste.data.remote.Resources
 import com.example.teste.databinding.ActivityPaymentBinding
+import com.example.teste.features.receiptFeature.ReceiptPayment
 import com.example.teste.features.registerCard.RegisterCardActivity
 import com.example.teste.modules.Utils
 import com.example.teste.modules.changeText
@@ -39,18 +41,20 @@ class PaymentActivity : AppCompatActivity() {
         makePayment()
         nextActivity()
     }
-    companion object{
-        private const val EXTRA_USER = "EXTRA_USER"
-        private fun newIntent(context: Context,user: User):Intent{
-            return Intent(context,PaymentActivity::class.java).apply{
-                putExtra(EXTRA_USER,user)
-            }
-        }
-            fun startActivity(activity: Activity, user: User){
-                activity.startActivity(newIntent(activity,user))
 
+    companion object {
+        private const val EXTRA_USER = "EXTRA_USER"
+        private fun newIntent(context: Context, user: User): Intent {
+            return Intent(context, PaymentActivity::class.java).apply {
+                putExtra(EXTRA_USER, user)
             }
         }
+
+        fun startActivity(activity: Activity, user: User) {
+            activity.startActivity(newIntent(activity, user))
+
+        }
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when {
@@ -90,6 +94,7 @@ class PaymentActivity : AppCompatActivity() {
             if (it != "") {
                 val value = it.replace(",", ".").replace(".", "").toDouble()
                 changeColorTextValuePayment(value > 0.0)
+
             }
         })
     }
@@ -115,13 +120,18 @@ class PaymentActivity : AppCompatActivity() {
                     Resources.StatusRequest.SUCCES -> {
                         paymentButton.isClickable = true
                         it.data?.let { data ->
-                            Log.i("xrl8", data.toString() + "XD")
+                            if (data.transaction.status == "Aprovada") {
+                                showReceiptPayment()
+                            } else {
+                                popUpErro(resources.getString(R.string.invalidateCard))
+                            }
                         }
                     }
+
                     Resources.StatusRequest.ERROR -> {
                         paymentButton.isClickable = true
-                        it.error?.let { error ->
-                            Log.i("xrl8", error.toString() + "XD")
+                        it.error?.let { _ ->
+                            popUpErro(resources.getString(R.string.verifyNet))
                         }
 
                     }
@@ -133,6 +143,21 @@ class PaymentActivity : AppCompatActivity() {
         })
     }
 
+    private fun popUpErro(message: String) {
+        val alertDialog = AlertDialog.Builder(this)
+        alertDialog.setTitle(resources.getString(R.string.errorPayment))
+        alertDialog.setMessage(message)
+        alertDialog.setPositiveButton("Ok") { _, _ ->
+        }
+        alertDialog.show()
+    }
+
+    private fun showReceiptPayment() {
+        val receipt = ReceiptPayment(paymentViewModel.createReceipt())
+        receipt.show(supportFragmentManager, receipt.tag)
+
+    }
+
     private fun changeColorTextValuePayment(condition: Boolean) {
         if (condition) {
             valuePayment.setTextColor(
@@ -142,6 +167,12 @@ class PaymentActivity : AppCompatActivity() {
                     null
                 )
             )
+            paymentButton.background = ResourcesCompat.getDrawable(
+                resources,
+                R.drawable.standard_button,
+                null
+            )
+            paymentButton.isClickable = true
         } else {
             valuePayment.setTextColor(
                 ResourcesCompat.getColor(
@@ -150,6 +181,12 @@ class PaymentActivity : AppCompatActivity() {
                     null
                 )
             )
+            paymentButton.background = ResourcesCompat.getDrawable(
+                resources,
+                R.drawable.gray_button,
+                null
+            )
+            paymentButton.isClickable = false
         }
     }
 
@@ -160,10 +197,13 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun showNumberCard() {
-        val lengthNumerCard = paymentViewModel.creditCard.value?.numberCard?.length ?:16
+        val lengthNumerCard = paymentViewModel.creditCard.value?.numberCard?.length ?: 16
         var ballValue =
             resources.getString(R.string.masterCard) + " " + resources.getString(R.string.ball)
-        ballValue += " " + paymentViewModel.creditCard.value?.numberCard?.substring(lengthNumerCard-4, lengthNumerCard-1)
+        ballValue += " " + paymentViewModel.creditCard.value?.numberCard?.substring(
+            lengthNumerCard - 3 ,
+            lengthNumerCard
+        )
         masterCard.text = ballValue
     }
 

@@ -36,6 +36,7 @@ class ContactsActivity : AppCompatActivity() {
         focusController()
         changeColorText()
         contactsViewModel.requestUsers()
+
     }
 
     private fun setBinding() {
@@ -59,24 +60,24 @@ class ContactsActivity : AppCompatActivity() {
     }
 
     private fun nextActivity(user: User) {
-        PaymentActivity.startActivity(this,user)
+        PaymentActivity.startActivity(this, user)
     }
 
     private fun requestListObservable() {
         contactsViewModel.listUser.observe(this, Observer {
             when (it.status) {
                 Resources.StatusRequest.SUCCES -> {
-                    contactsViewModel.loading.value = false
+                    contactsViewModel.loading.postValue(false)
                     it.data?.let { list ->
                         adapter.setValues(list.toMutableList())
                         adapter.notifyDataSetChanged()
                     }
                 }
                 Resources.StatusRequest.ERROR -> {
-                    contactsViewModel.loading.value = false
+                    contactsViewModel.loading.postValue(false)
                 }
                 Resources.StatusRequest.LOADING -> {
-                    contactsViewModel.loading.value = true
+                    contactsViewModel.loading.postValue(true)
                 }
             }
         })

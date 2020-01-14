@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="receipt"
+            type="com.example.teste.data.model.Receipt" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blackBackGround"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarReceipt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="@dimen/viewSize30"
+            android:layout_height="@dimen/viewSize3"
+            android:layout_marginTop="@dimen/mini_small8"
+            android:background="@color/grayText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/receiptText"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_medium24"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbarReceipt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/toolbarReceipt"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <ImageView
+            android:id="@+id/photoUserReceipt"
+            imageUrl="@{receipt.photoUser}"
+            android:layout_width="@dimen/image130"
+            android:layout_height="@dimen/image130"
+            android:layout_marginTop="@dimen/margin_big32"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarReceipt"
+            tools:src="@color/blackWeak" />
+
+        <TextView
+            android:id="@+id/nameUserReceive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mini_small8"
+            android:text="@{receipt.userName}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_medium24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/photoUserReceipt"
+            app:layout_constraintLeft_toRightOf="@id/photoUserReceipt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/photoUserReceipt"
+            tools:text="@string/toolsUsername" />
+
+        <TextView
+            android:id="@+id/dataHour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mini_small8"
+            android:text="@{receipt.date}"
+            android:textColor="@color/grayText"
+            android:textSize="@dimen/text_small16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nameUserReceive"
+            tools:text="@string/toolsDate" />
+
+        <TextView
+            android:id="@+id/numberTransaction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mini_small8"
+            android:text="@{receipt.transaction}"
+            android:textColor="@color/grayText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dataHour"
+            tools:text="@string/toolsCodeTransaction" />
+
+        <View
+            android:id="@+id/viewOne"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/lineSizeView"
+            android:layout_margin="@dimen/margin_small16"
+            android:background="@color/grayText"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/numberTransaction" />
+
+        <TextView
+            android:id="@+id/masterCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_small16"
+            android:text="@{receipt.numberCard}"
+            android:textColor="@color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewOne"
+            tools:text="@string/toolsMasterCard" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_small16"
+            android:text="@{receipt.value}"
+            android:textColor="@color/white"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewOne"
+            tools:text="@string/toolsValue" />
+
+        <View
+            android:id="@+id/viewTwo"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/lineSizeView"
+            android:layout_margin="@dimen/margin_small16"
+            android:background="@color/grayText"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/masterCard" />
+
+        <TextView
+            android:id="@+id/masterCardx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_small16"
+            android:text="@string/total_payed"
+            android:textColor="@color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewTwo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_small16"
+            android:text="@{receipt.value}"
+             android:textColor="@color/white"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewTwo"
+            tools:text="@string/toolsValue" />
+
+        <Space
+            android:layout_width="@dimen/lineSizeView"
+            android:layout_height="@dimen/size150"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewTwo" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
